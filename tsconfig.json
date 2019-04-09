@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "angular-bootstrap-toasts": [
+        "dist/angular-bootstrap-toasts"
+      ],
+      "angular-bootstrap-toasts/*": [
+        "dist/angular-bootstrap-toasts/*"
+      ]
+    }
   }
 }

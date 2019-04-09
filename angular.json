@@ -130,6 +130,41 @@
           }
         }
       }
+    },
+    "Angular-Bootstrap-Toasts": {
+      "root": "projects/angular-bootstrap-toasts",
+      "sourceRoot": "projects/angular-bootstrap-toasts/src",
+      "projectType": "library",
+      "prefix": "tm",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/angular-bootstrap-toasts/tsconfig.lib.json",
+            "project": "projects/angular-bootstrap-toasts/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-bootstrap-toasts/src/test.ts",
+            "tsConfig": "projects/angular-bootstrap-toasts/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-bootstrap-toasts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-bootstrap-toasts/tsconfig.lib.json",
+              "projects/angular-bootstrap-toasts/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "lib-demo"

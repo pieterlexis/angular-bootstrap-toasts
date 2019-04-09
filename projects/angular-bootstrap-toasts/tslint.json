@@ -1,0 +1,15 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "tm",
+      "camelCase"
+    ],
+    "component-selector": [
+      false
+    ],
+    "space-before-function-paren": false
+  }
+}
