@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AngularBootstrapToastsModule, AngularBootstrapToastsService } from 'projects/angular-bootstrap-toasts/src/public-api';
+import { AngularBootstrapToastsModule } from 'projects/angular-bootstrap-toasts/src/public-api';
 
 @NgModule({
   declarations: [
@@ -14,9 +14,6 @@ import { AngularBootstrapToastsModule, AngularBootstrapToastsService } from 'pro
     BrowserModule,
     AppRoutingModule,
     AngularBootstrapToastsModule
-  ],
-  providers: [
-    AngularBootstrapToastsService
   ],
   bootstrap: [
     AppComponent

@@ -12,10 +12,22 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.toastsService.success('Some message');
+    this.toastsService.changeDefaultTitle('Custom Title');
+    this.toastsService.changeDefaultText('Custom Text');
+
+    this.toastsService.successToast({
+      text: 'Some long message to show for users!!! I can\'t beliave at this shit!'
+    });
 
     setTimeout(() => {
-      this.toastsService.success('N I C E');
+      this.toastsService.successToast({
+        text: '',
+        moment: '10:06 PM'
+      });
     }, 1500);
+
+    setTimeout(() => {
+      this.toastsService.destroyToast(1);
+    }, 3000);
   }
 }

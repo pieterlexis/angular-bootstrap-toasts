@@ -9,9 +9,19 @@ export class ToastMessage {
         return this.title;
     }
 
-    private message: string;
-    public get Message (): string {
-        return this.message;
+    private text: string;
+    public get Text (): string {
+        return this.text;
+    }
+
+    private moment: string;
+    public get Moment (): string {
+        return this.moment;
+    }
+
+    private duration: number;
+    public get Duration (): number {
+        return this.duration;
     }
 
     private iconClass: string;
@@ -20,17 +30,27 @@ export class ToastMessage {
     }
 
     constructor (
-        params: ToastMessageParams
+        params: ToastMessageParams,
+        toastId: number
     ) {
-        this.message = params.messsage;
-        this.title   = params.title;
+        this.id       = toastId;
+        this.text     = params.text;
+        this.title    = params.title;
+        this.moment   = params.moment;
+        this.duration = params.duration;
     }
 }
 
-export interface ToastMessageParams {
-    messsage: string;
+export class ToastMessageParams {
+    text: string;
 
     title?: string;
+
+    /** Great property to show time/date or something like this (short info near title) */
+    moment?: string;
+
+    /** ### Time in milliseconds over which will be displayed toast  */
+    duration?: number;
 
     /** ### Class of icon for title
      * For example: `fas fa-heart` (FontAwesome)
@@ -38,4 +58,4 @@ export interface ToastMessageParams {
     iconClass?: string;
 }
 
-export type ToastType = 'success';
+export type ToastType = 'simple' | 'success' | 'error' | 'confirm';

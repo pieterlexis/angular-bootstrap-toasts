@@ -1,1 +1,21 @@
-Toast
+<div
+    class="_toast">
+    <div class="_toast-header">
+        <i
+            *ngIf="Message.IconClass"
+            class="{{ Message.IconClass }}"></i>
+
+        <strong class="mr-auto">{{ Message.Title }}</strong>
+
+        <small *ngIf="Message.Moment">{{ Message.Moment }}</small>
+
+        <button
+            type="button"
+            class="_close"
+            (click)="remove()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="_toast-body" [innerHTML]="Message.Text"></div>
+</div>

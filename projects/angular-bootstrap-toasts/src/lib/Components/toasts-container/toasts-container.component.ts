@@ -3,12 +3,27 @@ import { ToastMessage } from '../../Models/toast-message.models';
 import { Subscription } from 'rxjs';
 import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
 import { PositionModel } from '../../Models/toast-container.models';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
     selector: 'Angular-Bootstrap-Toasts-Container',
     templateUrl: './toasts-container.component.html',
     styleUrls: [
         './toasts-container.component.css'
+    ],
+    animations: [
+        trigger(
+          'enterAnimation', [
+            transition(':enter', [
+                style({ transform: 'translateX(100%)', opacity: 0 }),
+                animate('350ms ease', style({ transform: 'translateX(0)', opacity: 1 }))
+            ]),
+            transition(':leave', [
+                style({ transform: 'translateX(0)', opacity: 1 }),
+                animate('300ms ease', style({ transform: 'scale(0.1)', opacity: 0 }))
+            ])
+          ]
+        )
     ]
 })
 export class ToastsContainerComponent implements OnInit, OnDestroy {
@@ -16,6 +31,9 @@ export class ToastsContainerComponent implements OnInit, OnDestroy {
     @Input() public Placement: PositionModel = {
         position: 'topRight'
     };
+
+    /** Width as CSS value */
+    @Input() public Width: string = '250px';
 
     private defaultMargin: string = '15px';
 

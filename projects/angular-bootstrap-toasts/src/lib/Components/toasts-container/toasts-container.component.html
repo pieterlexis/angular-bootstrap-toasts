@@ -1,11 +1,15 @@
 <div
-    class="fixed-container"
+    class="Advanced-Bootstrap-Container"
+    [style.width]="Width"
     [style.left]="(Placement.position === 'topLeft'      || Placement.position === 'bottomLeft')  ? Placement.marginLeft : ''"
     [style.right]="(Placement.position === 'topRight'    || Placement.position === 'bottomRight') ? Placement.marginRight : ''"
     [style.top]="(Placement.position === 'topLeft'       || Placement.position === 'topRight')    ? Placement.marginTop : ''"
     [style.bottom]="(Placement.position === 'bottomLeft' || Placement.position === 'bottomRight') ? Placement.marginBottom : ''">
-    <div
-        *ngFor="let message of messagesList">
-        {{ message.Message }}
-    </div>
+    
+    <Toast-Message
+        *ngFor="let message of messagesList"
+        class="Toast-Message-Container"
+        [@enterAnimation]
+        [Message]="message"></Toast-Message>
+
 </div>

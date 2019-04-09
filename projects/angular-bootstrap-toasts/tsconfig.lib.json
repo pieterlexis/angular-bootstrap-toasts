@@ -12,6 +12,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "downlevelIteration": true,
     "types": [],
     "lib": [
       "dom",
@@ -24,7 +25,8 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true
+    "enableResourceInlining": true,
+    "downlevelIteration": true
   },
   "exclude": [
     "src/test.ts",
