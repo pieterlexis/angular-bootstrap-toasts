@@ -3,5 +3,5 @@
  */
 
 export * from './lib/angular-bootstrap-toasts.service';
-export * from './lib/angular-bootstrap-toasts.component';
+export * from './lib/Components/toasts-container/toasts-container.component';
 export * from './lib/angular-bootstrap-toasts.module';

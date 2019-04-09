@@ -1,19 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'tm-Angular-Bootstrap-Toasts',
-  template: `
-    <p>
-      angular-bootstrap-toasts works!
-    </p>
-  `,
-  styles: []
+  selector: 'Angular-Bootstrap-Toasts',
+  templateUrl: './angular-bootstrap-toasts.component.html',
+  styleUrls: []
 })
-export class AngularBootstrapToastsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class AngularBootstrapToastsComponent {
+  constructor () {}
 }

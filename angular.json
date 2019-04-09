@@ -135,7 +135,6 @@
       "root": "projects/angular-bootstrap-toasts",
       "sourceRoot": "projects/angular-bootstrap-toasts/src",
       "projectType": "library",
-      "prefix": "tm",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
