@@ -85,10 +85,103 @@
             [(ngModel)]="ToastIconClass" />
     </div>
 
-    <button
-        class="btn btn-success"
-        (click)="showSuccessToast()">Success Alert</button>
+    <div class="form-group">
+        <label for="ToastTitleClassInput">Toast Title Class</label>
+
+        <input
+            id="ToastTitleClassInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ToastTitleClass" />
+    </div>
+
+    <div class="form-group">
+        <label for="ToastBodyClassInput">Toast Body Class</label>
+
+        <input
+            id="ToastBodyClassInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ToastBodyClass" />
+    </div>
+
+    <h4>Container Placement Settings</h4>
+
+    <div class="form-group">
+        <label for="ContainerPlacementSelect">Position</label>
+
+        <select
+            id="ContainerPlacementSelect"
+            class="form-control"
+            [(ngModel)]="ContainerPosition">
+            <option value="topRight">TopRight</option>
+            <option value="topLeft">TopLeft</option>
+            <option value="bottomRight">BottomRight</option>
+            <option value="bottomLeft">BottomLeft</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label for="ContainerMarginLeftInput">Container MarginLeft</label>
+        
+                <input
+                    id="ContainerMarginLeftInput"
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="ContainerMarginLeft" />
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="ContainerMarginRightInput">Container MarginRight</label>
+        
+                <input
+                    id="ContainerMarginRightInput"
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="ContainerMarginRight" />
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="ContainerMarginTopInput">Container MarginTop</label>
+        
+                <input
+                    id="ContainerMarginTopInput"
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="ContainerMarginTop" />
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="ContainerMarginBottomInput">Container MarginBottom</label>
+        
+                <input
+                    id="ContainerMarginBottomInput"
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="ContainerMarginBottom" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button
+            type="button"
+            style="margin-right: 10px;"
+            class="btn btn-success"
+            (click)="showSimpleToast()">Simple Toast</button>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="showConfirmToast()">Confirm Toast</button>
+    </div>
+    
 </div>
 
 <Angular-Bootstrap-Toasts-Container
-    [Placement]="{ position: 'topRight', marginTop: '60px' }"></Angular-Bootstrap-Toasts-Container>
+    [Placement]="{ position: ContainerPosition, marginTop: ContainerMarginTop, marginBottom: ContainerMarginBottom, marginLeft: ContainerMarginLeft, marginRight: ContainerMarginRight }"></Angular-Bootstrap-Toasts-Container>

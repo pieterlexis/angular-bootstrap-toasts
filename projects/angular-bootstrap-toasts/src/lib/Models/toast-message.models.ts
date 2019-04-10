@@ -4,6 +4,11 @@ export class ToastMessage {
         return this.id;
     }
 
+    private type: ToastType;
+    public get Type (): ToastType {
+        return this.type;
+    }
+
     private title: string;
     public get Title (): string {
         return this.title;
@@ -29,16 +34,29 @@ export class ToastMessage {
         return this.iconClass;
     }
 
+    private titleClass: string;
+    public get TitleClass (): string {
+        return this.titleClass;
+    }
+
+    private bodyClass: string;
+    public get BodyClass (): string {
+        return this.bodyClass;
+    }
+
     constructor (
         params: ToastMessageParams,
-        toastId: number
+        systemParams: SystemToastParams
     ) {
-        this.id        = toastId;
-        this.text      = params.text;
-        this.title     = params.title;
-        this.moment    = params.moment;
-        this.duration  = params.duration;
-        this.iconClass = params.iconClass;
+        this.id             = systemParams.id;
+        this.type           = systemParams.type;
+        this.text           = params.text;
+        this.title          = params.title;
+        this.moment         = params.moment;
+        this.duration       = params.duration;
+        this.iconClass      = params.iconClass;
+        this.titleClass     = params.titleClass;
+        this.bodyClass      = params.bodyClass;
     }
 }
 
@@ -58,6 +76,17 @@ export class ToastMessageParams {
      * You can also add color class, ex: `fas fa-heart text-success` (Bootstrap color class)
      */
     iconClass?: string;
+
+    /** Class for title block of toast */
+    titleClass?: string;
+
+    /** Class for body block of toast */
+    bodyClass?: string;
 }
 
-export type ToastType = 'simple' | 'success' | 'error' | 'confirm';
+export type ToastType = 'simple' | 'confirm';
+
+export interface SystemToastParams {
+    id: number;
+    type: ToastType;
+}

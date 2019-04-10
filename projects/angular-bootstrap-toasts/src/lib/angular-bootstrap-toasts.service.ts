@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ToastMessage, ToastMessageParams } from './Models/toast-message.models';
+import { ToastMessage, ToastMessageParams, SystemToastParams } from './Models/toast-message.models';
 
 @Injectable()
 export class AngularBootstrapToastsService {
@@ -31,16 +31,23 @@ export class AngularBootstrapToastsService {
   constructor () {}
 
   /** Show success toast message */
-  public successToast (params: ToastMessageParams) {
-    const messages    = this.messagesList.getValue();
-    const validParams = this.validateParams(params);
+  public showSimpleToast (params: ToastMessageParams): ToastMessage {
+    const systemParams: SystemToastParams = {
+      id: this.maxMessageId,
+      type: 'simple'
+    };
 
-    messages.push(
-      new ToastMessage(validParams, this.maxMessageId)
-    );
+    return this.createToast(params, systemParams);
+  }
 
-    this.maxMessageId++;
-    this.messagesList.next(messages);
+  /** Show toast message with confirmation and decline button variants */
+  public showConfirmToast (params: ToastMessageParams): ToastMessage {
+    const systemParams: SystemToastParams = {
+      id: this.maxMessageId,
+      type: 'confirm'
+    };
+
+    return this.createToast(params, systemParams);
   }
 
   /** Destroy toast message by toastId from DOM and MessagesList */
@@ -84,6 +91,19 @@ export class AngularBootstrapToastsService {
     }
   }
 
+  private createToast (params: ToastMessageParams, systemParams: SystemToastParams): ToastMessage {
+    const messages    = this.messagesList.getValue();
+    const validParams = this.validateParams(params);
+    const toast       = new ToastMessage(validParams, systemParams);
+
+    messages.push(toast);
+
+    this.maxMessageId++;
+    this.messagesList.next(messages);
+
+    return toast;
+  }
+
   private validateParams (params: ToastMessageParams): ToastMessageParams {
     const newParams = params;
 
@@ -109,7 +129,7 @@ export class AngularBootstrapToastsService {
   }
 
   private validateTitle (title: string) {
-    if (!title || typeof title !== 'string') {
+    if (typeof title !== 'string') {
       throw new Error('Tost default title must be a string');
     }
 
@@ -117,7 +137,7 @@ export class AngularBootstrapToastsService {
   }
 
   private validateText (text: string) {
-    if (!text || typeof text !== 'string') {
+    if (typeof text !== 'string') {
       throw new Error('Tost default text must be a string');
     }
 

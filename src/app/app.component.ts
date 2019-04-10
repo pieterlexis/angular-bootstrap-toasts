@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularBootstrapToastsService } from 'projects/angular-bootstrap-toasts/src/public-api';
+import { PositionType } from 'projects/angular-bootstrap-toasts/src/lib/Models/toast-container.models';
+import { ToastMessageParams } from 'projects/angular-bootstrap-toasts/src/lib/Models/toast-message.models';
 
 @Component({
   selector: 'ld-root',
@@ -22,6 +24,15 @@ export class AppComponent implements OnInit {
   public ToastDuration: number    = 5000;
   public ToastMoment: string      = 'just now';
   public ToastIconClass: string   = 'fas fa-check text-success';
+  public ToastTitleClass: string  = 'text-secondary';
+  public ToastBodyClass: string   = '';
+
+  public ContainerPosition: PositionType = 'topRight';
+
+  public ContainerMarginLeft: string   = '10px';
+  public ContainerMarginRight: string  = '10px';
+  public ContainerMarginTop: string    = '10px';
+  public ContainerMarginBottom: string = '10px';
 
   ngOnInit() {
     this.toastsService.changeDefaultTitle(this.DefaultTitle);
@@ -50,13 +61,25 @@ export class AppComponent implements OnInit {
     this.toastsService.changeDefaultDuration(duration);
   }
 
-  public showSuccessToast () {
-    this.toastsService.successToast({
+  public showSimpleToast () {
+    const params = this.getToastData();
+    this.toastsService.showSimpleToast(params);
+  }
+
+  public showConfirmToast () {
+    const params = this.getToastData();
+    this.toastsService.showConfirmToast(params);
+  }
+
+  private getToastData (): ToastMessageParams {
+    return {
       text: this.ToastMessage,
       title: this.ToastTitle,
       duration: this.ToastDuration,
       moment: this.ToastMoment,
-      iconClass: this.ToastIconClass
-    });
+      iconClass: this.ToastIconClass,
+      titleClass: this.ToastTitleClass,
+      bodyClass: this.ToastBodyClass
+    };
   }
 }

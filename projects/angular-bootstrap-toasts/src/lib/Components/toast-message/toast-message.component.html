@@ -1,11 +1,12 @@
 <div
     class="_toast">
-    <div class="_toast-header">
+    <div class="_toast-header {{ Message.TitleClass || '' }}">
         <i
             *ngIf="Message.IconClass"
             class="{{ Message.IconClass }}"></i>
 
-        <strong class="mr-auto">{{ Message.Title }}</strong>
+        <strong
+            class="mr-auto">{{ Message.Title }}</strong>
 
         <small *ngIf="Message.Moment">{{ Message.Moment }}</small>
 
@@ -17,5 +18,26 @@
         </button>
     </div>
 
-    <div class="_toast-body" [innerHTML]="Message.Text"></div>
+    <div
+        class="_duration-line"
+        [style.width]="durationLine.percents"></div>
+
+    <div
+        class="_toast-body">
+
+        <div
+            class="{{ Message.BodyClass || '' }}"
+            [innerHTML]="Message.Text"></div>
+
+        <div
+            *ngIf="Message.Type === 'confirm'"
+            class="_toast-toolbar">
+            <button
+                style="margin-right: 8px;"
+                class="btn btn-success btn-sm">Подтвердить</button>
+
+            <button
+                class="btn btn-light btn-sm">Отмена</button>
+        </div>
+    </div>
 </div>
