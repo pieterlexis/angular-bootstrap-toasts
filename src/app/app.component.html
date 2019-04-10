@@ -65,6 +65,26 @@
             [(ngModel)]="ToastDuration" />
     </div>
 
+    <div class="form-group">
+        <label for="ToastMomentInput">Toast Moment</label>
+
+        <input
+            id="ToastMomentInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ToastMoment" />
+    </div>
+
+    <div class="form-group">
+        <label for="ToastIconClassInput">Toast Icon Class</label>
+
+        <input
+            id="ToastIconClassInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ToastIconClass" />
+    </div>
+
     <button
         class="btn btn-success"
         (click)="showSuccessToast()">Success Alert</button>

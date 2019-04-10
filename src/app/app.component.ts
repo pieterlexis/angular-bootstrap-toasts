@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
   public ToastTitle: string       = 'Custom Title';
   public ToastMessage: string     = 'Custom Message';
   public ToastDuration: number    = 5000;
+  public ToastMoment: string      = 'just now';
+  public ToastIconClass: string   = 'fas fa-check text-success';
 
   ngOnInit() {
     this.toastsService.changeDefaultTitle(this.DefaultTitle);
@@ -52,7 +54,9 @@ export class AppComponent implements OnInit {
     this.toastsService.successToast({
       text: this.ToastMessage,
       title: this.ToastTitle,
-      duration: this.ToastDuration
+      duration: this.ToastDuration,
+      moment: this.ToastMoment,
+      iconClass: this.ToastIconClass
     });
   }
 }
