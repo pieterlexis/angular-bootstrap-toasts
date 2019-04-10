@@ -20,17 +20,13 @@ export class AngularBootstrapToastsService {
     return this.defaultText;
   }
 
-  private defaultDelay: number = 0;
-  public get DefaultDelay (): number {
-    return this.defaultDelay;
-  }
-
   private defaultDuration: number = 5000;
   public get DefaultDuration (): number {
     return this.defaultDuration;
   }
 
-  private maxMessageId: number = 1;
+  private minDuration: number   = 300;
+  private maxMessageId: number  = 1;
 
   constructor () {}
 
@@ -63,40 +59,80 @@ export class AngularBootstrapToastsService {
 
   /** Change Default **Title** for all toasts wich not get `title` property from params when creating */
   public changeDefaultTitle (newTitle: string) {
-    if (!newTitle || typeof newTitle !== 'string') {
-      throw new Error('Tost default title must be a string');
-    } else {
-      this.defaultTitle = newTitle;
+    const validTitle = this.validateTitle(newTitle);
+
+    if (validTitle) {
+      this.defaultTitle = validTitle;
     }
   }
 
   /** Change Default **Text** for all toasts wich not get `text` property from params when creating */
   public changeDefaultText (newText: string) {
-    if (!newText || typeof newText !== 'string') {
-      throw new Error('Tost default text must be a string');
-    } else {
-      this.defaultText = newText;
+    const validText = this.validateText(newText);
+
+    if (validText) {
+      this.defaultText = validText;
     }
   }
 
   /** Change Default **Duration** for all toasts */
   public changeDefaultDuration (duration: number) {
-    if (typeof duration !== 'number') {
-      throw new Error('Tost duration must be a number');
-    } else if (duration < 5) {
-      throw new Error('Tost duration must be more than 5 milliseconds');
-    } else {
-      this.defaultDelay = duration;
+    const validDuration = this.validateDuration(duration);
+
+    if (validDuration) {
+      this.defaultDuration = duration;
     }
   }
 
   private validateParams (params: ToastMessageParams): ToastMessageParams {
     const newParams = params;
 
-    newParams.title    = (newParams.title)    ? newParams.title    : this.DefaultTitle;
-    newParams.text     = (newParams.text)     ? newParams.text     : this.DefaultText;
-    newParams.duration = (newParams.duration) ? newParams.duration : this.DefaultDuration;
+    try {
+      newParams.title = this.validateTitle(newParams.title);
+    } catch (err) {
+      newParams.title = this.DefaultTitle;
+    }
+
+    try {
+      newParams.text = this.validateText(newParams.text);
+    } catch (err) {
+      newParams.text = this.DefaultText;
+    }
+
+    try {
+      newParams.duration = this.validateDuration(newParams.duration);
+    } catch (err) {
+      newParams.duration = this.DefaultDuration;
+    }
 
     return newParams;
+  }
+
+  private validateTitle (title: string) {
+    if (!title || typeof title !== 'string') {
+      throw new Error('Tost default title must be a string');
+    }
+
+    return title;
+  }
+
+  private validateText (text: string) {
+    if (!text || typeof text !== 'string') {
+      throw new Error('Tost default text must be a string');
+    }
+
+    return text;
+  }
+
+  private validateDuration (duration: number) {
+    const durationAsNumber: number = +duration;
+
+    if (isNaN(durationAsNumber)) {
+      throw new Error('Tost duration must be a number');
+    } else if (durationAsNumber < this.minDuration) {
+      throw new Error(`Tost duration must be more than ${this.minDuration} milliseconds`);
+    }
+
+    return durationAsNumber;
   }
 }

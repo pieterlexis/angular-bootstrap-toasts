@@ -4,30 +4,55 @@ import { AngularBootstrapToastsService } from 'projects/angular-bootstrap-toasts
 @Component({
   selector: 'ld-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: [
+    './app.component.css'
+  ]
 })
 export class AppComponent implements OnInit {
-  constructor(
+  constructor (
     private toastsService: AngularBootstrapToastsService
   ) {}
 
+  public DefaultTitle: string    = 'Default Title';
+  public DefaultMessage: string  = 'Default Message';
+  public DefaultDuration: number = 5000;
+
+  public ToastTitle: string       = 'Custom Title';
+  public ToastMessage: string     = 'Custom Message';
+  public ToastDuration: number    = 5000;
+
   ngOnInit() {
-    this.toastsService.changeDefaultTitle('Custom Title');
-    this.toastsService.changeDefaultText('Custom Text');
+    this.toastsService.changeDefaultTitle(this.DefaultTitle);
+    this.toastsService.changeDefaultText(this.DefaultMessage);
+  }
 
+  public changeDefaultTitle (e: any) {
+    const title = e.target.value;
+
+    this.DefaultTitle = title;
+    this.toastsService.changeDefaultTitle(title);
+  }
+
+  public changeDefaultMessage (e: any) {
+    const message = e.target.value;
+
+    this.DefaultMessage = message;
+    this.toastsService.changeDefaultText(message);
+  }
+
+
+  public changeDefaultDuration (e: any) {
+    const duration = +e.target.value;
+
+    this.DefaultDuration = duration;
+    this.toastsService.changeDefaultDuration(duration);
+  }
+
+  public showSuccessToast () {
     this.toastsService.successToast({
-      text: 'Some long message to show for users!!! I can\'t beliave at this shit!'
+      text: this.ToastMessage,
+      title: this.ToastTitle,
+      duration: this.ToastDuration
     });
-
-    setTimeout(() => {
-      this.toastsService.successToast({
-        text: '',
-        moment: '10:06 PM'
-      });
-    }, 1500);
-
-    setTimeout(() => {
-      this.toastsService.destroyToast(1);
-    }, 3000);
   }
 }

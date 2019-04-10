@@ -1,2 +1,74 @@
+<div class="card">
+    <h4>Default Settings</h4>
+    <div class="form-group">
+        <label for="DefaultTitleInput">Default Title</label>
+
+        <input
+            id="DefaultTitleInput"
+            class="form-control"
+            type="text"
+            [value]="DefaultTitle"
+            (change)="changeDefaultTitle($event)" />
+    </div>
+
+    <div class="form-group">
+        <label for="DefaultMessageInput">Default Message</label>
+
+        <input
+            id="DefaultMessageInput"
+            class="form-control"
+            type="text"
+            [value]="DefaultMessage"
+            (change)="changeDefaultMessage($event)" />
+    </div>
+
+    <div class="form-group">
+        <label for="DefaultDurationInput">Default Duration time</label>
+
+        <input
+            id="DefaultDurationInput"
+            class="form-control"
+            type="text"
+            [value]="DefaultDuration"
+            (change)="changeDefaultDuration($event)" />
+    </div>
+
+    <h4>Toast Settings</h4>
+
+    <div class="form-group">
+        <label for="ToastTitleInput">Toast Title</label>
+
+        <input
+            id="ToastTitleInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ToastTitle" />
+    </div>
+
+    <div class="form-group">
+        <label for="ToastMessageInput">Toast Message</label>
+
+        <input
+            id="ToastMessageInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ToastMessage" />
+    </div>
+
+    <div class="form-group">
+        <label for="ToastDurationInput">Toast Duration time</label>
+
+        <input
+            id="ToastDurationInput"
+            class="form-control"
+            type="number"
+            [(ngModel)]="ToastDuration" />
+    </div>
+
+    <button
+        class="btn btn-success"
+        (click)="showSuccessToast()">Success Alert</button>
+</div>
+
 <Angular-Bootstrap-Toasts-Container
     [Placement]="{ position: 'topRight', marginTop: '60px' }"></Angular-Bootstrap-Toasts-Container>

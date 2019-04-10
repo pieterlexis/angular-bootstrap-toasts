@@ -7,6 +7,8 @@
       "ld",
       "camelCase"
     ],
+    "no-inferrable-types": false,
+    "space-before-function-paren": false,
     "component-selector": [
       true,
       "element",
