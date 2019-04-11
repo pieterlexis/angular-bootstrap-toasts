@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastMessage } from '../../Models/toast-message.models';
 import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
-import anime from '../../../../node_modules/animejs/lib/anime.es.js';
+import anime from 'animejs';
 
 @Component({
     selector: 'Toast-Message',

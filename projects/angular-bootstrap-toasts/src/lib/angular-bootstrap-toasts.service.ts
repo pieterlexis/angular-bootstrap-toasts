@@ -91,9 +91,10 @@ export class AngularBootstrapToastsService {
     const toastSubscription = toast.ConfirmationResult$.subscribe(() => {
       const actualMessages = this.toastsList.getValue();
 
-      for (const [index, message] of actualMessages.entries()) {
-        if (message.Id === toast.Id) {
+      for (let index = 0; index < actualMessages.length; index++) {
+        if (actualMessages[index].Id === toast.Id) {
           actualMessages.splice(index, 1);
+          break;
         }
       }
 

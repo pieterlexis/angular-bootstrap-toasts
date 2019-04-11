@@ -27,5 +27,8 @@
         "dist/angular-bootstrap-toasts/*"
       ]
     }
-  }
+  },
+  "files": [
+    "projects/angular-bootstrap-toasts/index.ts"
+  ]
 }
