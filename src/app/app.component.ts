@@ -31,6 +31,14 @@ export class AppComponent implements OnInit {
   public IsToastProgressLineEnabled: boolean          = true;
   public IsToastDurationPausedWhenMouseEnter: boolean = true;
 
+  public ActionButtonText: string     = 'Confirm action';
+  public ActionButtonClass: string    = '';
+  public ActionButtonVisible: boolean = true;
+
+  public CancelButtonText: string     = 'Cancel';
+  public CancelButtonClass: string    = '';
+  public CancelButtonVisible: boolean = true;
+
   public ContainerPosition: PositionType = 'topRight';
 
   public ContainerMarginLeft: string   = '10px';
@@ -72,7 +80,12 @@ export class AppComponent implements OnInit {
 
   public showConfirmToast () {
     const params = this.getToastData();
-    this.toastsService.showConfirmToast(params);
+    const toast  = this.toastsService.showConfirmToast(params);
+
+    const toastSubscription = toast.ConfirmationResult$.subscribe((value) => {
+      console.log(`Toast confirm result: ${value}`);
+      toastSubscription.unsubscribe();
+    });
   }
 
   private getToastData (): ToastMessageParams {
@@ -86,7 +99,19 @@ export class AppComponent implements OnInit {
       bodyClass: this.ToastBodyClass,
       progressLineClass: this.ToastProgressLineClass,
       showProgressLine: this.IsToastProgressLineEnabled,
-      pauseDurationOnMouseEnter: this.IsToastDurationPausedWhenMouseEnter
+      pauseDurationOnMouseEnter: this.IsToastDurationPausedWhenMouseEnter,
+      toolbarItems: {
+        actionButton: {
+          text: this.ActionButtonText,
+          class: this.ActionButtonClass,
+          visible: this.ActionButtonVisible
+        },
+        cancelButton: {
+          text: this.CancelButtonText,
+          class: this.CancelButtonClass,
+          visible: this.CancelButtonVisible
+        }
+      }
     };
   }
 }

@@ -5,9 +5,9 @@ import { ToastMessage, ToastMessageParams, SystemToastParams } from './Models/to
 @Injectable()
 export class AngularBootstrapToastsService {
 
-  private messagesList: BehaviorSubject<ToastMessage[]> = new BehaviorSubject<ToastMessage[]>([]);
-  public get MessagesList$ (): Observable<ToastMessage[]> {
-    return this.messagesList.asObservable();
+  private toastsList: BehaviorSubject<ToastMessage[]> = new BehaviorSubject<ToastMessage[]>([]);
+  public get ToastsList$ (): Observable<ToastMessage[]> {
+    return this.toastsList.asObservable();
   }
 
   private defaultTitle: string = 'Title';
@@ -79,17 +79,17 @@ export class AngularBootstrapToastsService {
   }
 
   private createToast (params: ToastMessageParams, systemParams: SystemToastParams): ToastMessage {
-    const messages    = this.messagesList.getValue();
+    const messages    = this.toastsList.getValue();
     const validParams = this.validateParams(params);
     const toast       = new ToastMessage(validParams, systemParams);
 
     messages.push(toast);
 
     this.maxMessageId++;
-    this.messagesList.next(messages);
+    this.toastsList.next(messages);
 
-    toast.ConfirmationResult$.subscribe(() => {
-      const actualMessages = this.messagesList.getValue();
+    const toastSubscription = toast.ConfirmationResult$.subscribe(() => {
+      const actualMessages = this.toastsList.getValue();
 
       for (const [index, message] of actualMessages.entries()) {
         if (message.Id === toast.Id) {
@@ -97,7 +97,9 @@ export class AngularBootstrapToastsService {
         }
       }
 
-      this.messagesList.next(actualMessages);
+      this.toastsList.next(actualMessages);
+
+      toastSubscription.unsubscribe();
     });
 
     return toast;

@@ -91,6 +91,7 @@ export class ToastMessage {
         this.progressLineClass       = params.progressLineClass;
         this.titleClass              = params.titleClass;
         this.bodyClass               = params.bodyClass;
+        this.toolbarItems            = params.toolbarItems;
     }
 }
 

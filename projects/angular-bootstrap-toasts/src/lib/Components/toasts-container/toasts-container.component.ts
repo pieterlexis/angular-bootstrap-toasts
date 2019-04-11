@@ -37,7 +37,7 @@ export class ToastsContainerComponent implements OnInit, OnDestroy {
 
     private defaultMargin: string = '15px';
 
-    public messagesList: ToastMessage[] = [];
+    public toastsList: ToastMessage[] = [];
 
     private messagesListSubscription: Subscription;
 
@@ -46,8 +46,8 @@ export class ToastsContainerComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit () {
-        this.messagesListSubscription = this.toastsService.MessagesList$.subscribe(messages => {
-            this.messagesList = messages;
+        this.messagesListSubscription = this.toastsService.ToastsList$.subscribe(toasts => {
+            this.toastsList = toasts;
         });
 
         this.initPosition();

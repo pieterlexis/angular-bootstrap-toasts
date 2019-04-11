@@ -2,15 +2,15 @@
     class="_toast"
     (mouseover)="animationPause()"
     (mouseout)="animationPlay()">
-    <div class="_toast-header {{ Message.TitleClass || '' }}">
+    <div class="_toast-header {{ Toast.TitleClass || '' }}">
         <i
-            *ngIf="Message.IconClass"
-            class="{{ Message.IconClass }}"></i>
+            *ngIf="Toast.IconClass"
+            class="{{ Toast.IconClass }}"></i>
 
         <strong
-            class="mr-auto">{{ Message.Title }}</strong>
+            class="mr-auto">{{ Toast.Title }}</strong>
 
-        <small *ngIf="Message.Moment">{{ Message.Moment }}</small>
+        <small *ngIf="Toast.Moment">{{ Toast.Moment }}</small>
 
         <button
             type="button"
@@ -21,26 +21,28 @@
     </div>
 
     <div
-        *ngIf="Message.IsProgressLineEnabled"
-        class="_duration-line {{ Message.ProgressLineClass || '' }}"
+        *ngIf="Toast.IsProgressLineEnabled"
+        class="_duration-line {{ Toast.ProgressLineClass || '' }}"
         [style.width]="durationLine.percents"></div>
 
     <div
-        class="_toast-body {{ Message.BodyClass || '' }}">
+        class="_toast-body {{ Toast.BodyClass || '' }}">
 
-        <div [innerHTML]="Message.Text"></div>
+        <div [innerHTML]="Toast.Text"></div>
 
         <div
-            *ngIf="Message.Type === 'confirm'"
+            *ngIf="Toast.Type === 'confirm' && Toast.ToolbarItems"
             class="_toast-toolbar">
             <button
+                *ngIf="Toast.ToolbarItems.actionButton.visible"
                 style="margin-right: 8px;"
-                class="btn btn-success btn-sm"
-                (click)="remove(true)">Подтвердить</button>
+                class="{{ Toast.ToolbarItems.actionButton.class || 'btn btn-success btn-sm' }}"
+                (click)="remove(true)">{{ Toast.ToolbarItems.actionButton.text || 'Confirm' }}</button>
 
             <button
-                class="btn btn-light btn-sm"
-                (click)="remove(false)">Отмена</button>
+                *ngIf="Toast.ToolbarItems.cancelButton.visible"
+                class="{{ Toast.ToolbarItems.cancelButton.class || 'btn btn-light btn-sm' }}"
+                (click)="remove(false)">{{ Toast.ToolbarItems.cancelButton.text || 'Cancel' }}</button>
         </div>
     </div>
 </div>

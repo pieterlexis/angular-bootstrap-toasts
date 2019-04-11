@@ -11,7 +11,7 @@ import anime from '../../../../node_modules/animejs/lib/anime.es.js';
     ]
 })
 export class ToastMessageComponent implements OnInit {
-    @Input() public Message: ToastMessage;
+    @Input() public Toast: ToastMessage;
 
     public durationLine = {
         percents: '100%'
@@ -27,7 +27,7 @@ export class ToastMessageComponent implements OnInit {
         this.durationAnimation = anime({
             targets: this.durationLine,
             percents: '0%',
-            duration: this.Message.Duration,
+            duration: this.Toast.Duration,
             easing: 'linear',
             complete: () => {
                 this.remove();
@@ -36,7 +36,7 @@ export class ToastMessageComponent implements OnInit {
     }
 
     public animationPause () {
-        if (this.durationAnimation && this.Message.IsDurationPausedByMouse) {
+        if (this.durationAnimation && this.Toast.IsDurationPausedByMouse) {
             this.durationAnimation.pause();
         }
     }
@@ -48,6 +48,6 @@ export class ToastMessageComponent implements OnInit {
     }
 
     public remove (confirmationResult?: boolean) {
-        this.Message.Close(confirmationResult || false);
+        this.Toast.Close(confirmationResult || false);
     }
 }

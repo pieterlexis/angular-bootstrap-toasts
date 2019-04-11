@@ -1,205 +1,306 @@
 <div class="card">
-    <h4>Default Settings</h4>
-    <div class="form-group">
-        <label for="DefaultTitleInput">Default Title</label>
+    <div>
+        <h4>Default Settings</h4>
 
-        <input
-            id="DefaultTitleInput"
-            class="form-control"
-            type="text"
-            [value]="DefaultTitle"
-            (change)="changeDefaultTitle($event)" />
-    </div>
-
-    <div class="form-group">
-        <label for="DefaultMessageInput">Default Message</label>
-
-        <input
-            id="DefaultMessageInput"
-            class="form-control"
-            type="text"
-            [value]="DefaultMessage"
-            (change)="changeDefaultMessage($event)" />
-    </div>
-
-    <div class="form-group">
-        <label for="DefaultDurationInput">Default Duration time</label>
-
-        <input
-            id="DefaultDurationInput"
-            class="form-control"
-            type="text"
-            [value]="DefaultDuration"
-            (change)="changeDefaultDuration($event)" />
-    </div>
-
-    <h4>Toast Settings</h4>
-
-    <div class="form-group">
-        <label for="ToastTitleInput">Toast Title</label>
-
-        <input
-            id="ToastTitleInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastTitle" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastMessageInput">Toast Message</label>
-
-        <input
-            id="ToastMessageInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastMessage" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastDurationInput">Toast Duration time</label>
-
-        <input
-            id="ToastDurationInput"
-            class="form-control"
-            type="number"
-            [(ngModel)]="ToastDuration" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastMomentInput">Toast Moment</label>
-
-        <input
-            id="ToastMomentInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastMoment" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastIconClassInput">Toast Icon Class</label>
-
-        <input
-            id="ToastIconClassInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastIconClass" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastTitleClassInput">Toast Title Class</label>
-
-        <input
-            id="ToastTitleClassInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastTitleClass" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastBodyClassInput">Toast Body Class</label>
-
-        <input
-            id="ToastBodyClassInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastBodyClass" />
-    </div>
-
-    <div class="form-group">
-        <label for="ToastProgressLineClassInput">Toast ProgressLine Class</label>
-
-        <input
-            id="ToastProgressLineClassInput"
-            class="form-control"
-            type="text"
-            [(ngModel)]="ToastProgressLineClass" />
-    </div>
-
-    <h4>Container Placement Settings</h4>
-
-    <div class="form-group">
-        <label for="ContainerPlacementSelect">Position</label>
-
-        <select
-            id="ContainerPlacementSelect"
-            class="form-control"
-            [(ngModel)]="ContainerPosition">
-            <option value="topRight">TopRight</option>
-            <option value="topLeft">TopLeft</option>
-            <option value="bottomRight">BottomRight</option>
-            <option value="bottomLeft">BottomLeft</option>
-        </select>
-    </div>
-
-    <div class="row">
-        <div class="col-3">
-            <div class="form-group">
-                <label for="ContainerMarginLeftInput">Container MarginLeft</label>
-        
-                <input
-                    id="ContainerMarginLeftInput"
-                    class="form-control"
-                    type="text"
-                    [(ngModel)]="ContainerMarginLeft" />
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="DefaultTitleInput"><b>Default Title</b></label>
+            
+                    <input
+                        id="DefaultTitleInput"
+                        class="form-control"
+                        type="text"
+                        [value]="DefaultTitle"
+                        (change)="changeDefaultTitle($event)" />
+                </div>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="form-group">
-                <label for="ContainerMarginRightInput">Container MarginRight</label>
-        
-                <input
-                    id="ContainerMarginRightInput"
-                    class="form-control"
-                    type="text"
-                    [(ngModel)]="ContainerMarginRight" />
+    
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="DefaultMessageInput"><b>Default Message</b></label>
+            
+                    <input
+                        id="DefaultMessageInput"
+                        class="form-control"
+                        type="text"
+                        [value]="DefaultMessage"
+                        (change)="changeDefaultMessage($event)" />
+                </div>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="form-group">
-                <label for="ContainerMarginTopInput">Container MarginTop</label>
-        
-                <input
-                    id="ContainerMarginTopInput"
-                    class="form-control"
-                    type="text"
-                    [(ngModel)]="ContainerMarginTop" />
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="form-group">
-                <label for="ContainerMarginBottomInput">Container MarginBottom</label>
-        
-                <input
-                    id="ContainerMarginBottomInput"
-                    class="form-control"
-                    type="text"
-                    [(ngModel)]="ContainerMarginBottom" />
+    
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="DefaultDurationInput"><b>Default Duration</b> time</label>
+            
+                    <input
+                        id="DefaultDurationInput"
+                        class="form-control"
+                        type="text"
+                        [value]="DefaultDuration"
+                        (change)="changeDefaultDuration($event)" />
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="ToastProgressBarEnabledCheckbox" [(ngModel)]="IsToastProgressLineEnabled">
-        <label class="custom-control-label" for="ToastProgressBarEnabledCheckbox">Is ProgressLine Enabled</label>
+    <div>
+        <h4>Toast Settings</h4>
+
+        <div class="form-group">
+            <label for="ToastTitleInput">Toast <b>Title</b></label>
+    
+            <input
+                id="ToastTitleInput"
+                class="form-control"
+                type="text"
+                [(ngModel)]="ToastTitle" />
+        </div>
+    
+        <div class="form-group">
+            <label for="ToastMessageTextarea">Toast <b>Message</b></label>
+    
+            <textarea
+                id="ToastMessageTextarea"
+                class="form-control"
+                type="text"
+                [(ngModel)]="ToastMessage"></textarea>
+        </div>
+    
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="ToastDurationInput">Toast <b>Duration</b> time</label>
+            
+                    <input
+                        id="ToastDurationInput"
+                        class="form-control"
+                        type="number"
+                        [(ngModel)]="ToastDuration" />
+                </div>
+            </div>
+    
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="ToastMomentInput">Toast <b>Moment</b></label>
+            
+                    <input
+                        id="ToastMomentInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ToastMoment" />
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ToastIconClassInput">Toast <b>Icon</b> Class</label>
+    
+                    <input
+                        id="ToastIconClassInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ToastIconClass" />
+                </div>
+            </div>
+    
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ToastTitleClassInput">Toast <b>Title</b> Class</label>
+            
+                    <input
+                        id="ToastTitleClassInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ToastTitleClass" />
+                </div>
+            </div>
+    
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ToastBodyClassInput">Toast <b>Body</b> Class</label>
+            
+                    <input
+                        id="ToastBodyClassInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ToastBodyClass" />
+                </div>
+            </div>
+    
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ToastProgressLineClassInput">Toast <b>ProgressLine</b> Class</label>
+            
+                    <input
+                        id="ToastProgressLineClassInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ToastProgressLineClass" />
+                </div>
+            </div>
+    
+        </div>
+    </div>
+     
+
+
+    <div>
+        <h4>ToolbarItems Settings</h4>
+        
+        <div class="row">
+            <div class="col-6">
+                <h5>ActionButton</h5>
+
+                <div class="form-group">
+                    <label for="ActionButtonTextInput"><b>Text</b></label>
+            
+                    <input
+                        id="ActionButtonTextInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ActionButtonText" />
+                </div>
+
+                <div class="form-group">
+                    <label for="ActionButtonClassInput"><b>Class</b></label>
+            
+                    <input
+                        id="ActionButtonClassInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ActionButtonClass" />
+                </div>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="ActionButtonVisibleCheckbox" [(ngModel)]="ActionButtonVisible">
+                    <label class="custom-control-label" for="ActionButtonVisibleCheckbox">Visible</label>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <h5>CancelButton</h5>
+
+                <div class="form-group">
+                    <label for="CancelButtonTextInput"><b>Text</b></label>
+            
+                    <input
+                        id="CancelButtonTextInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="CancelButtonText" />
+                </div>
+
+                <div class="form-group">
+                    <label for="CancelButtonClassInput"><b>Class</b></label>
+            
+                    <input
+                        id="CancelButtonClassInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="CancelButtonClass" />
+                </div>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="CancelButtonVisibleCheckbox" [(ngModel)]="CancelButtonVisible">
+                    <label class="custom-control-label" for="CancelButtonVisibleCheckbox">Visible</label>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="ToastDurationPausedWhenMouseEnterCheckbox" [(ngModel)]="IsToastDurationPausedWhenMouseEnter">
-        <label class="custom-control-label" for="ToastDurationPausedWhenMouseEnterCheckbox">Is Duration paused when mouse enter</label>
-    </div>
 
-    <div style="margin-top: 15px;">
-        <button
-            type="button"
-            style="margin-right: 10px;"
-            class="btn btn-success"
-            (click)="showSimpleToast()">Simple Toast</button>
 
-        <button
-            type="button"
-            class="btn btn-primary"
-            (click)="showConfirmToast()">Confirm Toast</button>
+    <div>
+        <h4>Container Placement Settings</h4>
+
+        <div class="form-group">
+            <label for="ContainerPlacementSelect">Container <b>Position</b></label>
+
+            <select
+                id="ContainerPlacementSelect"
+                class="form-control"
+                [(ngModel)]="ContainerPosition">
+                <option value="topRight">TopRight</option>
+                <option value="topLeft">TopLeft</option>
+                <option value="bottomRight">BottomRight</option>
+                <option value="bottomLeft">BottomLeft</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ContainerMarginLeftInput">Container <b>MarginLeft</b></label>
+            
+                    <input
+                        id="ContainerMarginLeftInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ContainerMarginLeft" />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ContainerMarginRightInput">Container <b>MarginRight</b></label>
+            
+                    <input
+                        id="ContainerMarginRightInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ContainerMarginRight" />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ContainerMarginTopInput">Container <b>MarginTop</b></label>
+            
+                    <input
+                        id="ContainerMarginTopInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ContainerMarginTop" />
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="ContainerMarginBottomInput">Container <b>MarginBottom</b></label>
+            
+                    <input
+                        id="ContainerMarginBottomInput"
+                        class="form-control"
+                        type="text"
+                        [(ngModel)]="ContainerMarginBottom" />
+                </div>
+            </div>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="ToastProgressBarEnabledCheckbox" [(ngModel)]="IsToastProgressLineEnabled">
+            <label class="custom-control-label" for="ToastProgressBarEnabledCheckbox">Is ProgressLine Enabled</label>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="ToastDurationPausedWhenMouseEnterCheckbox" [(ngModel)]="IsToastDurationPausedWhenMouseEnter">
+            <label class="custom-control-label" for="ToastDurationPausedWhenMouseEnterCheckbox">Is Duration paused when mouse enter</label>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <button
+                type="button"
+                style="margin-right: 10px;"
+                class="btn btn-success"
+                (click)="showSimpleToast()">Simple Toast</button>
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="showConfirmToast()">Confirm Toast</button>
+        </div>
     </div>
+    
     
 </div>
 

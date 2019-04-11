@@ -7,9 +7,9 @@
     [style.bottom]="(Placement.position === 'bottomLeft' || Placement.position === 'bottomRight') ? Placement.marginBottom : ''">
     
     <Toast-Message
-        *ngFor="let message of messagesList"
+        *ngFor="let toast of toastsList"
         class="Toast-Message-Container"
         [@enterAnimation]
-        [Message]="message"></Toast-Message>
+        [Toast]="toast"></Toast-Message>
 
 </div>
