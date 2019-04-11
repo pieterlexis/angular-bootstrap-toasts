@@ -131,16 +131,16 @@ export class AngularBootstrapToastsService {
   }
 
   private validateTitle (title: string) {
-    if (typeof title !== 'string') {
-      throw new Error('Tost default title must be a string');
+    if (!title || typeof title !== 'string') {
+      throw new Error('Tost default title must be a string with length');
     }
 
     return title;
   }
 
   private validateText (text: string) {
-    if (typeof text !== 'string') {
-      throw new Error('Tost default text must be a string');
+    if (!text || typeof text !== 'string') {
+      throw new Error('Tost default text must be a string with length');
     }
 
     return text;

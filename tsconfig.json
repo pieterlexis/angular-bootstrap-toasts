@@ -20,15 +20,9 @@
       "dom"
     ],
     "paths": {
-      "angular-bootstrap-toasts": [
-        "dist/angular-bootstrap-toasts"
-      ],
       "angular-bootstrap-toasts/*": [
-        "dist/angular-bootstrap-toasts/*"
+        "projects/angular-bootstrap-toasts/*"
       ]
     }
-  },
-  "files": [
-    "projects/angular-bootstrap-toasts/index.ts"
-  ]
+  }
 }
