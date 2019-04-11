@@ -1,5 +1,7 @@
 <div
-    class="_toast">
+    class="_toast"
+    (mouseover)="animationPause()"
+    (mouseout)="animationPlay()">
     <div class="_toast-header {{ Message.TitleClass || '' }}">
         <i
             *ngIf="Message.IconClass"
@@ -19,15 +21,14 @@
     </div>
 
     <div
-        class="_duration-line"
+        *ngIf="Message.IsProgressLineEnabled"
+        class="_duration-line {{ Message.ProgressLineClass || '' }}"
         [style.width]="durationLine.percents"></div>
 
     <div
-        class="_toast-body">
+        class="_toast-body {{ Message.BodyClass || '' }}">
 
-        <div
-            class="{{ Message.BodyClass || '' }}"
-            [innerHTML]="Message.Text"></div>
+        <div [innerHTML]="Message.Text"></div>
 
         <div
             *ngIf="Message.Type === 'confirm'"

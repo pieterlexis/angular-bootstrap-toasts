@@ -21,7 +21,7 @@
 
 ._duration-line {
     height: 3px;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .25);
 }
 
 ._toast-body {
@@ -63,8 +63,7 @@ button._close {
     font-weight: 700;
     line-height: 1;
     color: #000;
-    text-shadow: 0 1px 0 #fff;
-    opacity: .5;
+    opacity: .6;
 }
 
 button._close:hover {

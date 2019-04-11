@@ -29,9 +29,24 @@ export class ToastMessage {
         return this.duration;
     }
 
+    private isProgressLineEnabled: boolean;
+    public get IsProgressLineEnabled (): boolean {
+        return this.isProgressLineEnabled;
+    }
+
+    private isDurationPausedByMouse: boolean;
+    public get IsDurationPausedByMouse (): boolean {
+        return this.isDurationPausedByMouse;
+    }
+
     private iconClass: string;
     public get IconClass (): string {
         return this.iconClass;
+    }
+
+    private progressLineClass: string;
+    public get ProgressLineClass (): string {
+        return this.progressLineClass;
     }
 
     private titleClass: string;
@@ -48,15 +63,18 @@ export class ToastMessage {
         params: ToastMessageParams,
         systemParams: SystemToastParams
     ) {
-        this.id             = systemParams.id;
-        this.type           = systemParams.type;
-        this.text           = params.text;
-        this.title          = params.title;
-        this.moment         = params.moment;
-        this.duration       = params.duration;
-        this.iconClass      = params.iconClass;
-        this.titleClass     = params.titleClass;
-        this.bodyClass      = params.bodyClass;
+        this.id                      = systemParams.id;
+        this.type                    = systemParams.type;
+        this.text                    = params.text;
+        this.title                   = params.title;
+        this.moment                  = params.moment;
+        this.duration                = params.duration;
+        this.isProgressLineEnabled   = params.showProgressLine;
+        this.isDurationPausedByMouse = params.pauseDurationOnMouseEnter;
+        this.iconClass               = params.iconClass;
+        this.progressLineClass       = params.progressLineClass;
+        this.titleClass              = params.titleClass;
+        this.bodyClass               = params.bodyClass;
     }
 }
 
@@ -70,6 +88,15 @@ export class ToastMessageParams {
 
     /** Time in milliseconds over which will be displayed toast  */
     duration?: number;
+
+    /** Is toast will have progress line of duration time? */
+    showProgressLine?: boolean;
+
+    /** Is toast duration needs to be paused when mouse enter on toast block? */
+    pauseDurationOnMouseEnter?: boolean;
+
+    /** Class of progress line */
+    progressLineClass?: string;
 
     /** Class of icon for title
      * For example: `fas fa-heart` (FontAwesome)

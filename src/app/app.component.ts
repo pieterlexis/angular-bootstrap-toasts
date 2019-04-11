@@ -19,13 +19,17 @@ export class AppComponent implements OnInit {
   public DefaultMessage: string  = 'Default Message';
   public DefaultDuration: number = 5000;
 
-  public ToastTitle: string       = 'Custom Title';
-  public ToastMessage: string     = 'Custom Message';
-  public ToastDuration: number    = 5000;
-  public ToastMoment: string      = 'just now';
-  public ToastIconClass: string   = 'fas fa-check text-success';
-  public ToastTitleClass: string  = 'text-secondary';
-  public ToastBodyClass: string   = '';
+  public ToastTitle: string             = 'Custom Title';
+  public ToastMessage: string           = 'Custom Message';
+  public ToastDuration: number          = 5000;
+  public ToastMoment: string            = 'just now';
+  public ToastIconClass: string         = 'fas fa-check text-success';
+  public ToastTitleClass: string        = 'text-secondary';
+  public ToastBodyClass: string         = '';
+  public ToastProgressLineClass: string = '';
+
+  public IsToastProgressLineEnabled: boolean          = true;
+  public IsToastDurationPausedWhenMouseEnter: boolean = true;
 
   public ContainerPosition: PositionType = 'topRight';
 
@@ -79,7 +83,10 @@ export class AppComponent implements OnInit {
       moment: this.ToastMoment,
       iconClass: this.ToastIconClass,
       titleClass: this.ToastTitleClass,
-      bodyClass: this.ToastBodyClass
+      bodyClass: this.ToastBodyClass,
+      progressLineClass: this.ToastProgressLineClass,
+      showProgressLine: this.IsToastProgressLineEnabled,
+      pauseDurationOnMouseEnter: this.IsToastDurationPausedWhenMouseEnter
     };
   }
 }

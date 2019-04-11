@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ToastMessage } from '../../Models/toast-message.models';
 import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
-import { Subscription, timer } from 'rxjs';
 import anime from '../../../../node_modules/animejs/lib/anime.es.js';
 
 @Component({
@@ -11,14 +10,13 @@ import anime from '../../../../node_modules/animejs/lib/anime.es.js';
         './toast-message.component.css'
     ]
 })
-export class ToastMessageComponent implements OnInit, OnDestroy {
+export class ToastMessageComponent implements OnInit {
     @Input() public Message: ToastMessage;
 
     public durationLine = {
         percents: '100%'
     };
 
-    private durationSubscription: Subscription;
     private durationAnimation;
 
     constructor (
@@ -26,10 +24,6 @@ export class ToastMessageComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit () {
-        // this.durationSubscription = timer(this.Message.Duration).subscribe(() => {
-        //     this.remove();
-        // });
-
         this.durationAnimation = anime({
             targets: this.durationLine,
             percents: '0%',
@@ -41,9 +35,15 @@ export class ToastMessageComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy () {
-        if (this.durationSubscription) {
-            this.durationSubscription.unsubscribe();
+    public animationPause () {
+        if (this.durationAnimation && this.Message.IsDurationPausedByMouse) {
+            this.durationAnimation.pause();
+        }
+    }
+
+    public animationPlay () {
+        if (this.durationAnimation && this.durationAnimation.paused) {
+            this.durationAnimation.play();
         }
     }
 
