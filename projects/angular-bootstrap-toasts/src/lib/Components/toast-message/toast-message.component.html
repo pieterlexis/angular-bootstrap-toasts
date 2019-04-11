@@ -35,10 +35,12 @@
             class="_toast-toolbar">
             <button
                 style="margin-right: 8px;"
-                class="btn btn-success btn-sm">Подтвердить</button>
+                class="btn btn-success btn-sm"
+                (click)="remove(true)">Подтвердить</button>
 
             <button
-                class="btn btn-light btn-sm">Отмена</button>
+                class="btn btn-light btn-sm"
+                (click)="remove(false)">Отмена</button>
         </div>
     </div>
 </div>

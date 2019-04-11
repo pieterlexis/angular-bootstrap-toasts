@@ -47,7 +47,7 @@ export class ToastMessageComponent implements OnInit {
         }
     }
 
-    public remove () {
-        this.toastsService.destroyToast(this.Message.Id);
+    public remove (confirmationResult?: boolean) {
+        this.Message.Close(confirmationResult || false);
     }
 }

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   public ToastIconClass: string         = 'fas fa-check text-success';
   public ToastTitleClass: string        = 'text-secondary';
   public ToastBodyClass: string         = '';
-  public ToastProgressLineClass: string = '';
+  public ToastProgressLineClass: string = 'bg-success';
 
   public IsToastProgressLineEnabled: boolean          = true;
   public IsToastDurationPausedWhenMouseEnter: boolean = true;

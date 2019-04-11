@@ -25,6 +25,7 @@ export class AngularBootstrapToastsService {
     return this.defaultDuration;
   }
 
+
   private minDuration: number   = 300;
   private maxMessageId: number  = 1;
 
@@ -48,20 +49,6 @@ export class AngularBootstrapToastsService {
     };
 
     return this.createToast(params, systemParams);
-  }
-
-  /** Destroy toast message by toastId from DOM and MessagesList */
-  public destroyToast (toastId: number) {
-    const messages = this.messagesList.getValue();
-
-    for (const [index, message] of messages.entries()) {
-      if (message.Id === toastId) {
-        messages.splice(index, 1);
-        break;
-      }
-    }
-
-    this.messagesList.next(messages);
   }
 
   /** Change Default **Title** for all toasts wich not get `title` property from params when creating */
@@ -100,6 +87,18 @@ export class AngularBootstrapToastsService {
 
     this.maxMessageId++;
     this.messagesList.next(messages);
+
+    toast.ConfirmationResult$.subscribe(() => {
+      const actualMessages = this.messagesList.getValue();
+
+      for (const [index, message] of actualMessages.entries()) {
+        if (message.Id === toast.Id) {
+          actualMessages.splice(index, 1);
+        }
+      }
+
+      this.messagesList.next(actualMessages);
+    });
 
     return toast;
   }

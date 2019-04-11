@@ -1,4 +1,11 @@
+import { Subject, Observable } from 'rxjs';
+
 export class ToastMessage {
+    private confirmationResult: Subject<boolean> = new Subject<boolean>();
+    public get ConfirmationResult$ (): Observable<boolean> {
+        return this.confirmationResult.asObservable();
+    }
+
     private id: number;
     public get Id (): number {
         return this.id;
@@ -29,6 +36,11 @@ export class ToastMessage {
         return this.duration;
     }
 
+    private toolbarItems: ToastToolbarItems;
+    public get ToolbarItems (): ToastToolbarItems {
+        return this.toolbarItems;
+    }
+
     private isProgressLineEnabled: boolean;
     public get IsProgressLineEnabled (): boolean {
         return this.isProgressLineEnabled;
@@ -57,6 +69,10 @@ export class ToastMessage {
     private bodyClass: string;
     public get BodyClass (): string {
         return this.bodyClass;
+    }
+
+    public Close (confirmationStatus?: boolean) {
+        this.confirmationResult.next(confirmationStatus || false);
     }
 
     constructor (
@@ -109,6 +125,9 @@ export class ToastMessageParams {
 
     /** Class for body block of toast */
     bodyClass?: string;
+
+    /** Buttons for toast with type "confirm" */
+    toolbarItems?: ToastToolbarItems;
 }
 
 export type ToastType = 'simple' | 'confirm';
@@ -116,4 +135,15 @@ export type ToastType = 'simple' | 'confirm';
 export interface SystemToastParams {
     id: number;
     type: ToastType;
+}
+
+export interface ToastToolbarItems {
+    actionButton: ToastToolbarButton;
+    cancelButton: ToastToolbarButton;
+}
+
+export interface ToastToolbarButton {
+    text: string;
+    visible?: boolean;
+    class?: string;
 }
