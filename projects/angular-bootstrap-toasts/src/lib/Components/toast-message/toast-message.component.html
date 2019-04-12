@@ -1,5 +1,5 @@
 <div
-    class="_toast"
+    class="_toast {{ Toast.ToastClass || '' }}"
     (mouseover)="animationPause()"
     (mouseout)="animationPlay()">
     <div class="_toast-header {{ Toast.TitleClass || '' }}">

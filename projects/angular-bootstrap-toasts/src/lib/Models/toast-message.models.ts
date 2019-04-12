@@ -71,6 +71,11 @@ export class ToastMessage {
         return this.bodyClass;
     }
 
+    private toastClass: string;
+    public get ToastClass (): string {
+        return this.toastClass;
+    }
+
     public Close (confirmationStatus?: boolean) {
         this.confirmationResult.next(confirmationStatus || false);
     }
@@ -91,6 +96,7 @@ export class ToastMessage {
         this.progressLineClass       = params.progressLineClass;
         this.titleClass              = params.titleClass;
         this.bodyClass               = params.bodyClass;
+        this.toastClass              = params.toastClass;
         this.toolbarItems            = params.toolbarItems;
     }
 }
@@ -126,6 +132,9 @@ export class ToastMessageParams {
 
     /** Class for body block of toast */
     bodyClass?: string;
+
+    /** Class for block of toast */
+    toastClass?: string;
 
     /** Buttons for toast with type "confirm" */
     toolbarItems?: ToastToolbarItems;

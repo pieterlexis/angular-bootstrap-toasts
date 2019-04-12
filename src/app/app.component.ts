@@ -81,6 +81,7 @@ export class AppComponent implements OnInit {
       iconClass: new FormControl('fas fa-heart text-danger'),
       titleClass: new FormControl(''),
       bodyClass: new FormControl(''),
+      toastClass: new FormControl(''),
       progressLineClass: new FormControl('text-danger'),
       showProgressLine: new FormControl(true),
       pauseDurationOnMouseEnter: new FormControl(true),
