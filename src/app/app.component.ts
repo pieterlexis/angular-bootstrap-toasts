@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularBootstrapToastsService } from 'angular-bootstrap-toasts/index';
+import { AngularBootstrapToastsService } from 'projects/angular-bootstrap-toasts/src/public-api';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'ld-root',
+  selector: 'root',
   templateUrl: './app.component.html',
   styleUrls: [
     './app.component.css'

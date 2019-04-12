@@ -29,9 +29,6 @@
     "enableResourceInlining": true,
     "downlevelIteration": true
   },
-  "include": [
-    "index.ts"
-  ],
   "exclude": [
     "src/test.ts",
     "**/*.spec.ts"

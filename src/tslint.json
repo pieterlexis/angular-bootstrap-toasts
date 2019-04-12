@@ -9,11 +9,6 @@
     ],
     "no-inferrable-types": false,
     "space-before-function-paren": false,
-    "component-selector": [
-      true,
-      "element",
-      "ld",
-      "kebab-case"
-    ]
+    "component-selector": [false]
   }
 }
