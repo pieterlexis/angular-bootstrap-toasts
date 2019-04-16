@@ -1,27 +1,30 @@
-# LibDemo
+# Angular Bootstrap Toasts
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+This library provides you with the ability to display toast notifications.
+It is advisable to have the bootstrap library installed for the correct display of notifications.
+But this is not necessary, as you can easily customize everything using your classes.
 
-## Development server
+![](simple_toast_demo.gif)
+![](confirm_toast_demo.gif)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Install
+`npm install angular-bootstrap-toasts --save`
 
-## Code scaffolding
+## Demo
+You can watch this [demo](demo/angular-bootstrap-toasts-demo/index.html) and experiment with toasts.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Using
+All what you need is import AngularBootstrapToastsModule from 'angular-bootstrap-toasts' and add to imports of your App Module.
+Then you will have access to **AngularBootstrapToastsService** and **ToastsContainerComponent**.
 
-## Build
+### Service API:
+- **ToastsList$: Observable<ToastMessage[]>** - Observable with array of toast messages;
+- **DefaultTitle: string** - Default Title value;
+- **DefaultText: number** - Default Text value;
+- **DefaultDuration: number** - Default Duration time value;
+- **showSimpleToast(params: ToastMessageParams)** - Show success toast message;
+- **showConfirmToast(params: ToastMessageParams)** - Show toast message with confirmation and decline button variants;
+- **changeDefaultTitle(newTitle: string)** - Change Default Title for all toasts wich not get `title` property from params when creating;
+- **changeDefaultText(newText: string)** - Change Default Text for all toasts wich not get `text` property from params when creating;
+- **changeDefaultDuration(duration: number)** - Change Default Duration for all toasts;
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
