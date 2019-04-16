@@ -2,7 +2,7 @@
 
 This library provides you with the ability to display toast notifications.
 It is advisable to have the bootstrap library installed for the correct display of notifications.
-But this is not necessary, as you can easily customize everything using your classes.
+But this is not necessary, as you can easily customize everything using your own classes.
 
 ## Install
 `npm install angular-bootstrap-toasts --save`
@@ -19,12 +19,12 @@ You can watch this [demo](https://dreyliky.github.io/angular-bootstrap-toasts-de
 ## Using
 All what you need is import AngularBootstrapToastsModule from 'angular-bootstrap-toasts' and add to imports of your App Module.
 Then you will have access to **AngularBootstrapToastsService** and **ToastsContainerComponent**.
-##### Important!!!
+#### Important!!!
 Add the toast container into some component of your application (for example in app.component.html):
 `<Angular-Bootstrap-Toasts-Container></Angular-Bootstrap-Toasts-Container>`
 Toast notifications will be shown inside of this container!
 
-### ToastsContainer Component input params:
+### ToastsContainer Component input paramethers:
 - **Placement: PositionModel** - Model for setting placement paramethers of container: angles and margins from edges;
 - **Width: string** - Container width in pixels (for example: `200px`);
 - **Classes** - Classes for container customization;
