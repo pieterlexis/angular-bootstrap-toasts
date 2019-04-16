@@ -4,7 +4,10 @@ This library provides you with the ability to display toast notifications.
 It is advisable to have the bootstrap library installed for the correct display of notifications.
 But this is not necessary, as you can easily customize everything using your classes.
 
+#### Simple toast example:
 ![](simple_toast_demo.gif)
+
+#### Confirm toast example:
 ![](confirm_toast_demo.gif)
 
 ## Install

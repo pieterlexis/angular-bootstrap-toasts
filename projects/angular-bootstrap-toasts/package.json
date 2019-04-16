@@ -3,6 +3,13 @@
   "version": "0.0.13",
   "main": "src/public-api.ts",
   "module": "src/public-api.ts",
+  "author": {
+    "name": "DreyLiky",
+    "url": "http://t.me/DreyLiky"
+  },
+  "repository": {
+    "url": "https://github.com/dreyliky/angular-bootstrap-toasts.git"
+  },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
