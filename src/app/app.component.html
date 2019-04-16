@@ -1,4 +1,12 @@
 <div class="card">
+    <div class="alert alert-info">
+        This page includes:
+        <b>Bootstrap, FontAwesome</b>
+        libraries.<br>
+        
+        You can use classes from these libraries to play with toasts customization;
+    </div>
+
     <form novalidate [formGroup]="ToastForm">
         <div>
             <h4>Default Settings</h4>
@@ -243,8 +251,10 @@
 
 
 
-    <form novalidate [formGroup]="ContainerForm">
-        <h4>Container Placement Settings</h4>
+    <form novalidate [formGroup]="ContainerPlacementForm">
+        <h4>Container Settings</h4>
+
+        <h5>Placement</h5>
 
         <div class="form-group">
             <label for="ContainerPlacementSelect">Container <b>Position</b></label>
@@ -306,21 +316,34 @@
                 </div>
             </div>
         </div>
-
-        <div style="margin-top: 15px;">
-            <button
-                type="button"
-                style="margin-right: 10px;"
-                class="btn btn-success"
-                (click)="showSimpleToast()">Simple Toast</button>
-
-            <button
-                type="button"
-                class="btn btn-primary"
-                (click)="showConfirmToast()">Confirm Toast</button>
-        </div>
     </form>
+
+    <h5>Other</h5>
+
+    <div class="form-group">
+        <label for="ContainerClassesInput">Container <b>Class</b></label>
+
+        <input
+            id="ContainerClassesInput"
+            class="form-control"
+            type="text"
+            [(ngModel)]="ContainerClasses"/>
+    </div>
+
+    <div style="margin-top: 15px;">
+        <button
+            type="button"
+            style="margin-right: 10px;"
+            class="btn btn-success"
+            (click)="showSimpleToast()">Simple Toast</button>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="showConfirmToast()">Confirm Toast</button>
+    </div>
 </div>
 
 <Angular-Bootstrap-Toasts-Container
-    [Placement]="ContainerForm.value"></Angular-Bootstrap-Toasts-Container>
+    [Placement]="ContainerPlacementForm.value"
+    [Classes]="ContainerClasses"></Angular-Bootstrap-Toasts-Container>

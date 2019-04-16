@@ -21,7 +21,10 @@ export class AppComponent implements OnInit {
   public ActionButton: FormGroup;
   public CancelButton: FormGroup;
 
-  public ContainerForm: FormGroup;
+  public ContainerPlacementForm: FormGroup;
+
+
+  public ContainerClasses: string = '';
 
   constructor (
     private toastsService: AngularBootstrapToastsService
@@ -111,7 +114,7 @@ export class AppComponent implements OnInit {
   private createContainerForm () {
     const defaultMargin: string = '10px';
 
-    this.ContainerForm = new FormGroup({
+    this.ContainerPlacementForm = new FormGroup({
       position: new FormControl('topRight'),
       marginLeft: new FormControl(defaultMargin),
       marginRight: new FormControl(defaultMargin),
