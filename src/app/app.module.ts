@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AngularBootstrapToastsModule } from 'projects/angular-bootstrap-toasts/src/public-api';
@@ -15,7 +14,6 @@ import { AngularBootstrapToastsModule } from 'projects/angular-bootstrap-toasts/
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     AngularBootstrapToastsModule
   ],
   bootstrap: [
