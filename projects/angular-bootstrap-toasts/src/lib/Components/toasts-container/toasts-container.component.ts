@@ -35,8 +35,11 @@ export class ToastsContainerComponent implements OnInit, OnDestroy {
     /** Width as CSS value */
     @Input() public Width: string = '250px';
 
+    @Input() public Classes: string = '';
+
     private defaultMargin: string = '15px';
 
+    public MarginAsString: string = '';
     public toastsList: ToastMessage[] = [];
 
     private messagesListSubscription: Subscription;
@@ -50,7 +53,7 @@ export class ToastsContainerComponent implements OnInit, OnDestroy {
             this.toastsList = toasts;
         });
 
-        this.initPosition();
+        this.initParams();
     }
 
     ngOnDestroy () {
@@ -59,7 +62,7 @@ export class ToastsContainerComponent implements OnInit, OnDestroy {
         }
     }
 
-    private initPosition () {
+    private initParams () {
         if (!this.Placement) {
             this.Placement = {};
         }

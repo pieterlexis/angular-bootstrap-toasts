@@ -47,6 +47,12 @@ export class ToastMessageComponent implements OnInit {
         }
     }
 
+    public onClick () {
+        if (this.Toast.IsClosableByMouseClick) {
+            this.Toast.Close(false);
+        }
+    }
+
     public remove (confirmationResult?: boolean) {
         this.Toast.Close(confirmationResult || false);
     }
