@@ -53,5 +53,6 @@ Toast notifications will be shown inside of this container!
 - **titleClass?: string** - Class for title block of toast;
 - **bodyClass?: string** - Class for body block of toast;
 - **toastClass?: string** - Class for block of toast;
+- **toolbarClass?: string** - Class for toolbar block of toast;
 - **closeButtonClass?: string** - Class for close button;
 - **toolbarItems?: ToastToolbarItems** - Buttons for toast with type "confirm";
