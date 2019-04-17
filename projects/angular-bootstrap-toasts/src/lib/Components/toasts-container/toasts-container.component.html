@@ -1,5 +1,5 @@
 <div
-    class="Advanced-Bootstrap-Container"
+    class="Advanced-Bootstrap-Container {{ Classes || '' }}"
     [style.width]="Width"
     [style.left]="(Placement.position === 'topLeft'      || Placement.position === 'bottomLeft')  ? Placement.marginLeft : ''"
     [style.right]="(Placement.position === 'topRight'    || Placement.position === 'bottomRight') ? Placement.marginRight : ''"

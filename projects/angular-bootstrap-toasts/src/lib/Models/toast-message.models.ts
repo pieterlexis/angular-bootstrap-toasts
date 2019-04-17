@@ -51,9 +51,19 @@ export class ToastMessage {
         return this.isDurationPausedByMouse;
     }
 
+    private isClosableByMouseClick: boolean;
+    public get IsClosableByMouseClick (): boolean {
+        return this.isClosableByMouseClick;
+    }
+
     private iconClass: string;
     public get IconClass (): string {
         return this.iconClass;
+    }
+
+    private closeButtonClass: string;
+    public get CloseButtonClass (): string {
+        return this.closeButtonClass;
     }
 
     private progressLineClass: string;
@@ -97,18 +107,20 @@ export class ToastMessage {
         this.duration                = params.duration;
         this.isProgressLineEnabled   = params.showProgressLine;
         this.isDurationPausedByMouse = params.pauseDurationOnMouseEnter;
+        this.isClosableByMouseClick  = params.closeByClick;
         this.iconClass               = params.iconClass;
         this.progressLineClass       = params.progressLineClass;
         this.titleClass              = params.titleClass;
         this.bodyClass               = params.bodyClass;
         this.toastClass              = params.toastClass;
         this.toolbarClass            = params.toolbarClass;
+        this.closeButtonClass        = params.closeButtonClass;
         this.toolbarItems            = params.toolbarItems;
     }
 }
 
 export class ToastMessageParams {
-    text: string;
+    text?: string;
 
     title?: string;
 
@@ -120,6 +132,9 @@ export class ToastMessageParams {
 
     /** Is toast will have progress line of duration time? */
     showProgressLine?: boolean;
+
+    /** Is toast will closable by mouse click on toast block */
+    closeByClick?: boolean;
 
     /** Is toast duration needs to be paused when mouse enter on toast block? */
     pauseDurationOnMouseEnter?: boolean;
@@ -144,6 +159,9 @@ export class ToastMessageParams {
 
     /** Class for toolbar block */
     toolbarClass?: string;
+
+    /** Class for close button */
+    closeButtonClass?: string;
 
     /** Buttons for toast with type "confirm" */
     toolbarItems?: ToastToolbarItems;
