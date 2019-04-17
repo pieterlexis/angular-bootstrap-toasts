@@ -86,7 +86,10 @@ export class AppComponent implements OnInit {
       bodyClass: new FormControl(''),
       toastClass: new FormControl(''),
       progressLineClass: new FormControl('text-danger'),
+      toolbarClass: new FormControl(''),
+      closeButtonClass: new FormControl(''),
       showProgressLine: new FormControl(true),
+      closeByClick: new FormControl(false),
       pauseDurationOnMouseEnter: new FormControl(true),
       toolbarItems: this.ToolbarItems
     });

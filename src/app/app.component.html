@@ -162,8 +162,32 @@
                             formControlName="progressLineClass" />
                     </div>
                 </div>
-        
             </div>
+
+            <div class="form-group">
+                <label for="CloseButtonClassInput">Toast close button <b>Class</b></label>
+        
+                <input
+                    id="CloseButtonClassInput"
+                    class="form-control"
+                    type="text"
+                    formControlName="closeButtonClass" />
+            </div>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="ToastProgressBarEnabledCheckbox" formControlName="showProgressLine">
+            <label class="custom-control-label" for="ToastProgressBarEnabledCheckbox">Is ProgressLine Enabled</label>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="ToastDurationPausedWhenMouseEnterCheckbox" formControlName="pauseDurationOnMouseEnter">
+            <label class="custom-control-label" for="ToastDurationPausedWhenMouseEnterCheckbox">Is Duration paused when mouse enter</label>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="ToastCloseByMouseClickCheckbox" formControlName="closeByClick">
+            <label class="custom-control-label" for="ToastCloseByMouseClickCheckbox">Is Toast closable by mouse click</label>
         </div>
          
     
@@ -236,16 +260,14 @@
             </div>
         </div>
 
-        <hr>
-
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="ToastProgressBarEnabledCheckbox" formControlName="showProgressLine">
-            <label class="custom-control-label" for="ToastProgressBarEnabledCheckbox">Is ProgressLine Enabled</label>
-        </div>
-
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="ToastDurationPausedWhenMouseEnterCheckbox" formControlName="pauseDurationOnMouseEnter">
-            <label class="custom-control-label" for="ToastDurationPausedWhenMouseEnterCheckbox">Is Duration paused when mouse enter</label>
+        <div class="form-group">
+            <label for="ToolbarClassInput">Toolbar <b>Class</b></label>
+    
+            <input
+                id="ToolbarClassInput"
+                class="form-control"
+                type="text"
+                formControlName="toolbarClass" />
         </div>
     </form>
 

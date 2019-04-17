@@ -46,7 +46,11 @@
 }
 
 ._toast-toolbar {
-    margin-top: 20px;
+    margin: 10px;
+}
+
+._toast-toolbar_actionButton {
+    margin-right: 8px;
 }
 
 

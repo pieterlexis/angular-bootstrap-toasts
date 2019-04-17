@@ -35,13 +35,12 @@
         class="_toast-toolbar {{ Toast.ToolbarClass || '' }}">
         <button
             *ngIf="Toast.ToolbarItems.actionButton.visible"
-            style="margin-right: 8px;"
-            class="{{ Toast.ToolbarItems.actionButton.class || 'btn btn-success btn-sm' }}"
+            class="_toast-toolbar_actionButton {{ Toast.ToolbarItems.actionButton.class || 'btn btn-success btn-sm' }}"
             (click)="remove(true)">{{ Toast.ToolbarItems.actionButton.text || 'Confirm' }}</button>
 
         <button
             *ngIf="Toast.ToolbarItems.cancelButton.visible"
-            class="{{ Toast.ToolbarItems.cancelButton.class || 'btn btn-light btn-sm' }}"
+            class="_toast-toolbar_cancelButton {{ Toast.ToolbarItems.cancelButton.class || 'btn btn-light btn-sm' }}"
             (click)="remove(false)">{{ Toast.ToolbarItems.cancelButton.text || 'Cancel' }}</button>
     </div>
 </div>
