@@ -26,23 +26,21 @@
         [style.width]="durationLine.percents"></div>
 
     <div
-        class="_toast-body {{ Toast.BodyClass || '' }}">
+        class="_toast-body {{ Toast.BodyClass || '' }}"
+        [innerHTML]="Toast.Text"></div>
 
-        <div [innerHTML]="Toast.Text"></div>
+    <div
+        *ngIf="Toast.Type === 'confirm' && Toast.ToolbarItems"
+        class="_toast-toolbar {{ Toast.ToolbarClass || '' }}">
+        <button
+            *ngIf="Toast.ToolbarItems.actionButton.visible"
+            style="margin-right: 8px;"
+            class="{{ Toast.ToolbarItems.actionButton.class || 'btn btn-success btn-sm' }}"
+            (click)="remove(true)">{{ Toast.ToolbarItems.actionButton.text || 'Confirm' }}</button>
 
-        <div
-            *ngIf="Toast.Type === 'confirm' && Toast.ToolbarItems"
-            class="_toast-toolbar">
-            <button
-                *ngIf="Toast.ToolbarItems.actionButton.visible"
-                style="margin-right: 8px;"
-                class="{{ Toast.ToolbarItems.actionButton.class || 'btn btn-success btn-sm' }}"
-                (click)="remove(true)">{{ Toast.ToolbarItems.actionButton.text || 'Confirm' }}</button>
-
-            <button
-                *ngIf="Toast.ToolbarItems.cancelButton.visible"
-                class="{{ Toast.ToolbarItems.cancelButton.class || 'btn btn-light btn-sm' }}"
-                (click)="remove(false)">{{ Toast.ToolbarItems.cancelButton.text || 'Cancel' }}</button>
-        </div>
+        <button
+            *ngIf="Toast.ToolbarItems.cancelButton.visible"
+            class="{{ Toast.ToolbarItems.cancelButton.class || 'btn btn-light btn-sm' }}"
+            (click)="remove(false)">{{ Toast.ToolbarItems.cancelButton.text || 'Cancel' }}</button>
     </div>
 </div>

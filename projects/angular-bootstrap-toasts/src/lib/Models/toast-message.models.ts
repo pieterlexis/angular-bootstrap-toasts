@@ -71,6 +71,11 @@ export class ToastMessage {
         return this.bodyClass;
     }
 
+    private toolbarClass: string;
+    public get ToolbarClass (): string {
+        return this.toolbarClass;
+    }
+
     private toastClass: string;
     public get ToastClass (): string {
         return this.toastClass;
@@ -97,6 +102,7 @@ export class ToastMessage {
         this.titleClass              = params.titleClass;
         this.bodyClass               = params.bodyClass;
         this.toastClass              = params.toastClass;
+        this.toolbarClass            = params.toolbarClass;
         this.toolbarItems            = params.toolbarItems;
     }
 }
@@ -135,6 +141,9 @@ export class ToastMessageParams {
 
     /** Class for block of toast */
     toastClass?: string;
+
+    /** Class for toolbar block */
+    toolbarClass?: string;
 
     /** Buttons for toast with type "confirm" */
     toolbarItems?: ToastToolbarItems;
