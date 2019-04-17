@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ToastMessage } from '../../Models/toast-message.models';
 import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
-import anime from 'animejs';
+import { filter, tap } from 'rxjs/operators';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
     selector: 'Toast-Message',
@@ -10,41 +11,51 @@ import anime from 'animejs';
         './toast-message.component.css'
     ]
 })
-export class ToastMessageComponent implements OnInit {
+export class ToastMessageComponent implements OnInit, OnDestroy {
     @Input() public Toast: ToastMessage;
 
-    public durationLine = {
-        percents: '100%'
-    };
+    public currentDuration: number;
+    public progressLineWidth: string = '100%';
 
-    private durationAnimation;
+    private msInterval: number      = 10;
+    private isMouseFocused: boolean = false;
+    private durationTimer: Subscription;
 
     constructor (
         private toastsService: AngularBootstrapToastsService
     ) {}
 
     ngOnInit () {
-        this.durationAnimation = anime({
-            targets: this.durationLine,
-            percents: '0%',
-            duration: this.Toast.Duration,
-            easing: 'linear',
-            complete: () => {
-                this.remove();
-            }
-        });
+        this.currentDuration = this.Toast.Duration;
+
+        this.durationTimer = interval(this.msInterval).pipe(
+            filter(() => !this.isMouseFocused),
+            tap(() => {
+                this.currentDuration -= this.msInterval;
+
+                if (this.Toast.IsProgressLineEnabled) {
+                    this.progressLineWidth = (100 / this.Toast.Duration * this.currentDuration).toFixed(0) + '%';
+                }
+
+                if (this.currentDuration <= 0) {
+                    this.Toast.Close();
+                }
+            })
+        ).subscribe();
+    }
+
+    ngOnDestroy () {
+        if (this.durationTimer) {
+            this.durationTimer.unsubscribe();
+        }
     }
 
     public animationPause () {
-        if (this.durationAnimation && this.Toast.IsDurationPausedByMouse) {
-            this.durationAnimation.pause();
-        }
+        this.isMouseFocused = true;
     }
 
     public animationPlay () {
-        if (this.durationAnimation && this.durationAnimation.paused) {
-            this.durationAnimation.play();
-        }
+        this.isMouseFocused = false;
     }
 
     public onClick () {

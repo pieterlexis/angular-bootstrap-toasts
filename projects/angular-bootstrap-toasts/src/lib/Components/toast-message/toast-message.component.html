@@ -24,7 +24,7 @@
     <div
         *ngIf="Toast.IsProgressLineEnabled"
         class="_duration-line {{ Toast.ProgressLineClass || '' }}"
-        [style.width]="durationLine.percents"></div>
+        [style.width]="progressLineWidth"></div>
 
     <div
         class="_toast-body {{ Toast.BodyClass || '' }}"

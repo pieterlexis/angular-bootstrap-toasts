@@ -1,6 +1,6 @@
 {
   "name": "angular-bootstrap-toasts",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "src/public-api.ts",
   "module": "src/public-api.ts",
   "author": {
@@ -13,8 +13,5 @@
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
-  },
-  "dependencies": {
-    "animejs": "^3.0.1"
   }
 }
