@@ -1,77 +1,81 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ToastMessage } from '../../Models/toast-message.models';
-import { Subscription } from 'rxjs';
-import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
-import { PositionModel } from '../../Models/toast-container.models';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { Subscription } from 'rxjs';
+import { ToastMessage, ContainerPositionModel } from '../../models';
+import { ContainerPosition } from '../../interfaces';
+import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
 
 @Component({
-    selector: 'Angular-Bootstrap-Toasts-Container',
+    selector: 'angular-bootstrap-toasts-container',
     templateUrl: './toasts-container.component.html',
-    styleUrls: [
-        './toasts-container.component.css'
-    ],
+    styleUrls: ['./toasts-container.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [
         trigger(
-          'enterAnimation', [
-            transition(':enter', [
-                style({ transform: 'translateX(100%)', opacity: 0 }),
-                animate('350ms ease', style({ transform: 'translateX(0)', opacity: 1 }))
-            ]),
-            transition(':leave', [
-                style({ transform: 'translateX(0)', opacity: 1 }),
-                animate('300ms ease', style({ transform: 'scale(0.1)', opacity: 0 }))
-            ])
-          ]
+            'toastAnimation',
+            [
+                transition(':enter', [
+                    style({ transform: 'translateX(100%)', opacity: 0 }),
+                    animate('350ms ease', style({ transform: 'translateX(0)', opacity: 1 }))
+                ]),
+                transition(':leave', [
+                    style({ transform: 'scale(1)', opacity: 1 }),
+                    animate('300ms ease', style({ transform: 'scale(0)', opacity: 0 }))
+                ])
+            ]
         )
     ]
 })
 export class ToastsContainerComponent implements OnInit, OnDestroy {
 
-    @Input() public Placement: PositionModel = {
-        position: 'topRight'
-    };
+    @Input()
+    public set placement (data: ContainerPosition) {
+        this._placement = data;
 
-    /** Width as CSS value */
-    @Input() public Width: string = '250px';
+        this.validatePlacement();
+    }
 
-    @Input() public Classes: string = '';
+    public get placement (): ContainerPosition {
+        return this._placement;
+    }
 
-    private defaultMargin: string = '15px';
+    @Input()
+    public width: string = '250px';
 
-    public MarginAsString: string = '';
+    @Input()
+    public classes: string = '';
+
+    public margin: string = '';
+
     public toastsList: ToastMessage[] = [];
 
+    private _placement: ContainerPosition = new ContainerPositionModel();
     private messagesListSubscription: Subscription;
 
     constructor (
-        private toastsService: AngularBootstrapToastsService
+        private readonly toastsService: AngularBootstrapToastsService,
+        private readonly changeDetector: ChangeDetectorRef
     ) {}
 
-    ngOnInit () {
-        this.messagesListSubscription = this.toastsService.ToastsList$.subscribe(toasts => {
-            this.toastsList = toasts;
-        });
+    public ngOnInit (): void {
+        this.messagesListSubscription = this.toastsService.toastsList$
+            .subscribe((toasts) => {
+                this.toastsList = toasts;
 
-        this.initParams();
+                this.changeDetector.markForCheck();
+            });
     }
 
-    ngOnDestroy () {
+    public ngOnDestroy (): void {
         if (this.messagesListSubscription) {
             this.messagesListSubscription.unsubscribe();
         }
     }
 
-    private initParams () {
-        if (!this.Placement) {
-            this.Placement = {};
+    private validatePlacement (): void {
+        if (!this._placement) {
+            throw new Error(`Toasts container must receive a placement object as input parameter!`);
         }
-
-        this.Placement.marginTop    = this.Placement.marginTop    || this.defaultMargin;
-        this.Placement.marginBottom = this.Placement.marginBottom || this.defaultMargin;
-        this.Placement.marginLeft   = this.Placement.marginLeft   || this.defaultMargin;
-        this.Placement.marginRight  = this.Placement.marginRight  || this.defaultMargin;
-
-        this.Placement.position     = this.Placement.position     || 'topRight';
     }
+
 }

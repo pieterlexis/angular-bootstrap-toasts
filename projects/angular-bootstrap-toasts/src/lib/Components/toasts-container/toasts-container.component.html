@@ -1,15 +1,17 @@
 <div
-    class="Advanced-Bootstrap-Container {{ Classes || '' }}"
-    [style.width]="Width"
-    [style.left]="(Placement.position === 'topLeft'      || Placement.position === 'bottomLeft')  ? Placement.marginLeft : ''"
-    [style.right]="(Placement.position === 'topRight'    || Placement.position === 'bottomRight') ? Placement.marginRight : ''"
-    [style.top]="(Placement.position === 'topLeft'       || Placement.position === 'topRight')    ? Placement.marginTop : ''"
-    [style.bottom]="(Placement.position === 'bottomLeft' || Placement.position === 'bottomRight') ? Placement.marginBottom : ''">
+    class="wrapper"
+    [ngClass]="classes"
+    [style.width]="width"
+    [style.left]="(placement.position === 'topLeft'      || placement.position === 'bottomLeft')  ? placement.marginLeft : ''"
+    [style.right]="(placement.position === 'topRight'    || placement.position === 'bottomRight') ? placement.marginRight : ''"
+    [style.top]="(placement.position === 'topLeft'       || placement.position === 'topRight')    ? placement.marginTop : ''"
+    [style.bottom]="(placement.position === 'bottomLeft' || placement.position === 'bottomRight') ? placement.marginBottom : ''">
     
-    <Toast-Message
+    <toast-message
         *ngFor="let toast of toastsList"
+        @toastAnimation
         class="Toast-Message-Container"
-        [@enterAnimation]
-        [Toast]="toast"></Toast-Message>
+        [toast]="toast">
+    </toast-message>
 
 </div>

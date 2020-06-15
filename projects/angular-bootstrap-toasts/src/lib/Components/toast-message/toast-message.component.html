@@ -1,46 +1,67 @@
 <div
-    class="_toast {{ Toast.ToastClass || '' }}"
-    (mouseover)="animationPause()"
-    (mouseout)="animationPlay()"
-    (click)="onClick()">
-    <div class="_toast-header {{ Toast.TitleClass || '' }}">
+    [ngClass]="toast.toastClass"
+    class="wrapper"
+    (mouseover)="onToastWrapperMouseOver()"
+    (mouseout)="onToastWrapperMouseOut()"
+    (click)="onToastWrapperClick()">
+    <div
+        [ngClass]="toast.titleClass"
+        class="toast-header">
         <i
-            *ngIf="Toast.IconClass"
-            class="{{ Toast.IconClass }}"></i>
+            *ngIf="toast.iconClass"
+            class="{{ toast.iconClass }}">
+        </i>
 
-        <strong
-            class="mr-auto">{{ Toast.Title }}</strong>
+        <strong class="mr-auto">
+            {{ toast.title }}
+        </strong>
 
-        <small *ngIf="Toast.Moment">{{ Toast.Moment }}</small>
+        <small *ngIf="toast.moment">
+            {{ toast.moment }}
+        </small>
 
         <button
             type="button"
-            class="_close {{ Toast.CloseButtonClass || '' }}"
-            (click)="remove()">
-            <span aria-hidden="true">&times;</span>
+            [ngClass]="toast.closeButtonClass"
+            class="close"
+            (click)="closeToast()">
+            <span aria-hidden="true">
+                &times;
+            </span>
         </button>
     </div>
 
     <div
-        *ngIf="Toast.IsProgressLineEnabled"
-        class="_duration-line {{ Toast.ProgressLineClass || '' }}"
+        *ngIf="toast.isProgressLineEnabled"
+        [ngClass]="toast.progressLineClass"
+        class="duration-line"
         [style.width]="progressLineWidth"></div>
 
     <div
-        class="_toast-body {{ Toast.BodyClass || '' }}"
-        [innerHTML]="Toast.Text"></div>
+        [ngClass]="toast.bodyClass"
+        class="toast-body"
+        [innerHTML]="toast.text"></div>
 
     <div
-        *ngIf="Toast.Type === 'confirm' && Toast.ToolbarItems"
-        class="_toast-toolbar {{ Toast.ToolbarClass || '' }}">
-        <button
-            *ngIf="Toast.ToolbarItems.actionButton.visible"
-            class="_toast-toolbar_actionButton {{ Toast.ToolbarItems.actionButton.class || 'btn btn-success btn-sm' }}"
-            (click)="remove(true)">{{ Toast.ToolbarItems.actionButton.text || 'Confirm' }}</button>
+        *ngIf="toast.type === 'confirm' && toast.toolbarItems"
+        [ngClass]="toast.toolbarClass"
+        class="toast-toolbar">
 
         <button
-            *ngIf="Toast.ToolbarItems.cancelButton.visible"
-            class="_toast-toolbar_cancelButton {{ Toast.ToolbarItems.cancelButton.class || 'btn btn-light btn-sm' }}"
-            (click)="remove(false)">{{ Toast.ToolbarItems.cancelButton.text || 'Cancel' }}</button>
+            *ngIf="toast.toolbarItems.actionButton.visible"
+            [ngClass]="toast.toolbarItems.actionButton.class || 'btn btn-success btn-sm'"
+            class="toast-toolbaractionButton"
+            (click)="closeToast(true)">
+            {{ toast.toolbarItems.actionButton.text || 'Confirm' }}
+        </button>
+
+        <button
+            *ngIf="toast.toolbarItems.cancelButton.visible"
+            [ngClass]="toast.toolbarItems.cancelButton.class || 'btn btn-light btn-sm'"
+            class="toast-toolbarcancelButton"
+            (click)="closeToast(false)">
+            {{ toast.toolbarItems.cancelButton.text || 'Cancel' }}
+        </button>
+
     </div>
 </div>

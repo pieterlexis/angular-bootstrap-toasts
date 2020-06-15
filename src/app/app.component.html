@@ -7,7 +7,7 @@
         You can use classes from these libraries to play with toasts customization;
     </div>
 
-    <form novalidate [formGroup]="ToastForm">
+    <form novalidate [formGroup]="toastForm">
         <div>
             <h4>Default Settings</h4>
 
@@ -20,7 +20,7 @@
                             id="DefaultTitleInput"
                             class="form-control"
                             type="text"
-                            [value]="DefaultTitle"
+                            [value]="defaultTitle"
                             (change)="changeDefaultTitle($event)" />
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                             id="DefaultMessageInput"
                             class="form-control"
                             type="text"
-                            [value]="DefaultMessage"
+                            [value]="defaultMessage"
                             (change)="changeDefaultMessage($event)" />
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                             id="DefaultDurationInput"
                             class="form-control"
                             type="text"
-                            [value]="DefaultDuration"
+                            [value]="defaultDuration"
                             (change)="changeDefaultDuration($event)" />
                     </div>
                 </div>
@@ -273,7 +273,7 @@
 
 
 
-    <form novalidate [formGroup]="ContainerPlacementForm">
+    <form novalidate [formGroup]="containerPlacementForm">
         <h4>Container Settings</h4>
 
         <h5>Placement</h5>
@@ -349,7 +349,7 @@
             id="ContainerClassesInput"
             class="form-control"
             type="text"
-            [(ngModel)]="ContainerClasses"/>
+            [(ngModel)]="containerClasses"/>
     </div>
 
     <div style="margin-top: 15px;">
@@ -366,6 +366,7 @@
     </div>
 </div>
 
-<Angular-Bootstrap-Toasts-Container
-    [Placement]="ContainerPlacementForm.value"
-    [Classes]="ContainerClasses"></Angular-Bootstrap-Toasts-Container>
+<angular-bootstrap-toasts-container
+    [placement]="containerPlacementForm.value"
+    [classes]="containerClasses">
+</angular-bootstrap-toasts-container>

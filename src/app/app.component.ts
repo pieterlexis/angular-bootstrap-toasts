@@ -1,128 +1,129 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AngularBootstrapToastsService } from 'projects/angular-bootstrap-toasts/src/public-api';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'root',
-  templateUrl: './app.component.html',
-  styleUrls: [
-    './app.component.css'
-  ]
+    selector: 'root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  public DefaultTitle: string    = 'Default Title';
-  public DefaultMessage: string  = 'Default Message';
-  public DefaultDuration: number = 5000;
+
+    public defaultTitle: string    = 'Default Title';
+    public defaultMessage: string  = 'Default Message';
+    public defaultDuration: number = 5000;
+
+    public toastForm: FormGroup;
+
+    public toolbarItems: FormGroup;
+    public actionButton: FormGroup;
+    public cancelButton: FormGroup;
+
+    public containerPlacementForm: FormGroup;
 
 
-  public ToastForm: FormGroup;
+    public containerClasses: string = '';
 
-  public ToolbarItems: FormGroup;
-  public ActionButton: FormGroup;
-  public CancelButton: FormGroup;
+    constructor (
+        private toastsService: AngularBootstrapToastsService
+    ) {}
 
-  public ContainerPlacementForm: FormGroup;
+    public ngOnInit (): void {
+        this.toastsService.changeDefaultTitle(this.defaultTitle);
+        this.toastsService.changeDefaultText(this.defaultMessage);
 
+        this.createToolbarItemsForm();
+        this.createContainerForm();
+        this.createMainForm();
+    }
 
-  public ContainerClasses: string = '';
+    public changeDefaultTitle (e: any): void {
+        const title = e.target.value;
 
-  constructor (
-    private toastsService: AngularBootstrapToastsService
-  ) {}
+        this.defaultTitle = title;
+        this.toastsService.changeDefaultTitle(title);
+    }
 
-  ngOnInit() {
-    this.toastsService.changeDefaultTitle(this.DefaultTitle);
-    this.toastsService.changeDefaultText(this.DefaultMessage);
+    public changeDefaultMessage (e: any): void {
+        const message = e.target.value;
 
-    this.createToolbarItemsForm();
-    this.createContainerForm();
-    this.createMainForm();
-  }
+        this.defaultMessage = message;
+        this.toastsService.changeDefaultText(message);
+    }
 
-  public changeDefaultTitle (e: any) {
-    const title = e.target.value;
+    public changeDefaultDuration (e: any): void {
+        const duration = +e.target.value;
 
-    this.DefaultTitle = title;
-    this.toastsService.changeDefaultTitle(title);
-  }
+        this.defaultDuration = duration;
+        this.toastsService.changeDefaultDuration(duration);
+    }
 
-  public changeDefaultMessage (e: any) {
-    const message = e.target.value;
+    public showSimpleToast (): void {
+        const params = this.toastForm.value;
+        this.toastsService.showSimpleToast(params);
+    }
 
-    this.DefaultMessage = message;
-    this.toastsService.changeDefaultText(message);
-  }
+    public showConfirmToast (): void {
+        const params = this.toastForm.value;
+        const toast  = this.toastsService.showConfirmToast(params);
 
-  public changeDefaultDuration (e: any) {
-    const duration = +e.target.value;
+        const toastSubscription = toast.confirmationResult$
+            .subscribe((value) => {
+                console.log(`Toast confirm result: ${value}`);
+                toastSubscription.unsubscribe();
+            });
+    }
 
-    this.DefaultDuration = duration;
-    this.toastsService.changeDefaultDuration(duration);
-  }
+    private createMainForm (): void {
+        this.toastForm = new FormGroup({
+            text: new FormControl('Some custom Message.<br>Here is available <b>HTML</b> tags!'),
+            title: new FormControl('Custom Title'),
+            duration: new FormControl(5000),
+            moment: new FormControl('just now'),
+            iconClass: new FormControl('fas fa-heart text-danger'),
+            titleClass: new FormControl(''),
+            bodyClass: new FormControl(''),
+            toastClass: new FormControl(''),
+            progressLineClass: new FormControl('text-danger'),
+            toolbarClass: new FormControl(''),
+            closeButtonClass: new FormControl(''),
+            showProgressLine: new FormControl(true),
+            closeByClick: new FormControl(false),
+            pauseDurationOnMouseEnter: new FormControl(true),
+            toolbarItems: this.toolbarItems
+        });
+    }
 
-  public showSimpleToast () {
-    const params = this.ToastForm.value;
-    this.toastsService.showSimpleToast(params);
-  }
+    private createToolbarItemsForm (): void {
+        this.actionButton = new FormGroup({
+            text: new FormControl('Confirm action'),
+            class: new FormControl('btn btn-success btn-sm'),
+            visible: new FormControl(true)
+        });
 
-  public showConfirmToast () {
-    const params = this.ToastForm.value;
-    const toast  = this.toastsService.showConfirmToast(params);
+        this.cancelButton = new FormGroup({
+            text: new FormControl('Cancel'),
+            class: new FormControl('btn btn-secondary btn-sm'),
+            visible: new FormControl(true)
+        });
 
-    const toastSubscription = toast.ConfirmationResult$.subscribe((value) => {
-      console.log(`Toast confirm result: ${value}`);
-      toastSubscription.unsubscribe();
-    });
-  }
+        this.toolbarItems = new FormGroup({
+            actionButton: this.actionButton,
+            cancelButton: this.cancelButton
+        });
+    }
 
-  private createMainForm () {
-    this.ToastForm = new FormGroup({
-      text: new FormControl('Some custom Message.<br>Here is available <b>HTML</b> tags!'),
-      title: new FormControl('Custom Title'),
-      duration: new FormControl(5000),
-      moment: new FormControl('just now'),
-      iconClass: new FormControl('fas fa-heart text-danger'),
-      titleClass: new FormControl(''),
-      bodyClass: new FormControl(''),
-      toastClass: new FormControl(''),
-      progressLineClass: new FormControl('text-danger'),
-      toolbarClass: new FormControl(''),
-      closeButtonClass: new FormControl(''),
-      showProgressLine: new FormControl(true),
-      closeByClick: new FormControl(false),
-      pauseDurationOnMouseEnter: new FormControl(true),
-      toolbarItems: this.ToolbarItems
-    });
-  }
+    private createContainerForm (): void {
+        const defaultMargin: string = '10px';
 
-  private createToolbarItemsForm () {
-    this.ActionButton = new FormGroup({
-      text: new FormControl('Confirm action'),
-      class: new FormControl('btn btn-success btn-sm'),
-      visible: new FormControl(true)
-    });
+        this.containerPlacementForm = new FormGroup({
+            position: new FormControl('topRight'),
+            marginLeft: new FormControl(defaultMargin),
+            marginRight: new FormControl(defaultMargin),
+            marginTop: new FormControl(defaultMargin),
+            marginBottom: new FormControl(defaultMargin)
+        });
+    }
 
-    this.CancelButton = new FormGroup({
-      text: new FormControl('Cancel'),
-      class: new FormControl('btn btn-secondary btn-sm'),
-      visible: new FormControl(true)
-    });
-
-    this.ToolbarItems = new FormGroup({
-      actionButton: this.ActionButton,
-      cancelButton: this.CancelButton
-    });
-  }
-
-  private createContainerForm () {
-    const defaultMargin: string = '10px';
-
-    this.ContainerPlacementForm = new FormGroup({
-      position: new FormControl('topRight'),
-      marginLeft: new FormControl(defaultMargin),
-      marginRight: new FormControl(defaultMargin),
-      marginTop: new FormControl(defaultMargin),
-      marginBottom: new FormControl(defaultMargin)
-    });
-  }
 }

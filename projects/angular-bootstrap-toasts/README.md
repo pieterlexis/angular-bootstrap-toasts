@@ -21,19 +21,19 @@ All what you need is import AngularBootstrapToastsModule from 'angular-bootstrap
 Then you will have access to **AngularBootstrapToastsService** and **ToastsContainerComponent**.
 #### Important!!!
 Add the toast container into some component of your application (for example in app.component.html):
-`<Angular-Bootstrap-Toasts-Container></Angular-Bootstrap-Toasts-Container>`
+`<angular-bootstrap-toasts-container></angular-bootstrap-toasts-container>`
 Toast notifications will be shown inside of this container!
 
 ### ToastsContainer Component input paramethers:
-- **Placement: PositionModel** - Model for setting placement paramethers of container: angles and margins from edges;
-- **Width: string** - Container width in pixels (for example: `200px`);
-- **Classes** - Classes for container customization;
+- **placement: ContainerPosition** - Model for setting placement paramethers of container: angles and margins from edges;
+- **width: string** - Container width in pixels (for example: `200px`);
+- **classes** - Classes for container customization;
 
 ### Service API:
-- **ToastsList$: Observable<ToastMessage[]>** - Observable with array of toast messages;
-- **DefaultTitle: string** - Default Title value;
-- **DefaultText: number** - Default Text value;
-- **DefaultDuration: number** - Default Duration time value;
+- **toastsList$: Observable<ToastMessage[]>** - Observable with array of toast messages;
+- **defaultTitle: string** - Default Title value;
+- **defaultText: number** - Default Text value;
+- **defaultDuration: number** - Default Duration time value;
 - **showSimpleToast(params: ToastMessageParams)** - Show success toast message;
 - **showConfirmToast(params: ToastMessageParams)** - Show toast message with confirmation and decline button variants;
 - **changeDefaultTitle(newTitle: string)** - Change Default Title for all toasts wich not get `title` property from params when creating;

@@ -7,17 +7,17 @@ import { AppComponent } from './app.component';
 import { AngularBootstrapToastsModule } from 'projects/angular-bootstrap-toasts/src/public-api';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularBootstrapToastsModule
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularBootstrapToastsModule
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
-export class AppModule { }
+export class AppModule {}

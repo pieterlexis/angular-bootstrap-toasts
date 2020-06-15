@@ -1,17 +1,18 @@
 {
-  "extends": "../../tslint.json",
-  "rules": {
-    "directive-selector": [
-      true,
-      "attribute",
-      "tm",
-      "camelCase"
-    ],
-    "component-selector": [
-      false
-    ],
-    "no-inferrable-types": false,
-    "no-namespace": false,
-    "space-before-function-paren": false
-  }
+    "extends": "../../tslint.json",
+    "rules": {
+        "directive-selector": [
+            true,
+            "attribute",
+            "tm",
+            "camelCase"
+        ],
+        "component-selector": [
+            false
+        ],
+        "no-inferrable-types": false,
+        "no-namespace": false,
+        "space-before-function-paren": false,
+        "variable-name": false
+    }
 }

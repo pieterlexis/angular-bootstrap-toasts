@@ -1,70 +1,86 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { ToastMessage } from '../../Models/toast-message.models';
-import { AngularBootstrapToastsService } from '../../angular-bootstrap-toasts.service';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { ToastMessage } from '../../models/toast-message.model';
 import { filter, tap } from 'rxjs/operators';
 import { interval, Subscription } from 'rxjs';
 
 @Component({
-    selector: 'Toast-Message',
+    selector: 'toast-message',
     templateUrl: './toast-message.component.html',
-    styleUrls: [
-        './toast-message.component.css'
-    ]
+    styleUrls: ['./toast-message.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToastMessageComponent implements OnInit, OnDestroy {
-    @Input() public Toast: ToastMessage;
+
+    @Input()
+    public toast: ToastMessage;
 
     public currentDuration: number;
     public progressLineWidth: string = '100%';
 
-    private msInterval: number      = 10;
-    private isMouseFocused: boolean = false;
-    private durationTimer: Subscription;
+    private progressUpdateIntervalMs: number = 10;
+    private isMouseOverWrapper: boolean = false;
+
+    private durationTimerSubscription: Subscription;
 
     constructor (
-        private toastsService: AngularBootstrapToastsService
+        private readonly changeDetector: ChangeDetectorRef
     ) {}
 
-    ngOnInit () {
-        this.currentDuration = this.Toast.Duration;
+    public ngOnInit (): void {
+        this.currentDuration = this.toast.duration;
 
-        this.durationTimer = interval(this.msInterval).pipe(
-            filter(() => !this.isMouseFocused),
-            tap(() => {
-                this.currentDuration -= this.msInterval;
+        this.durationTimerSubscription = interval(this.progressUpdateIntervalMs)
+            .pipe(
+                filter(() => (
+                    (this.toast.isDurationPausedByMouse && !this.isMouseOverWrapper)
+                    ||
+                    (!this.toast.isDurationPausedByMouse)
+                )),
+                tap(() => {
+                    this.currentDuration -= this.progressUpdateIntervalMs;
 
-                if (this.Toast.IsProgressLineEnabled) {
-                    this.progressLineWidth = (100 / this.Toast.Duration * this.currentDuration).toFixed(0) + '%';
-                }
+                    if (this.toast.isProgressLineEnabled) {
+                        this.updateProgressLineWidth();
+                    }
 
-                if (this.currentDuration <= 0) {
-                    this.Toast.Close();
-                }
-            })
-        ).subscribe();
+                    this.onProgressUpdate();
+                })
+            )
+            .subscribe(() => this.changeDetector.markForCheck());
     }
 
-    ngOnDestroy () {
-        if (this.durationTimer) {
-            this.durationTimer.unsubscribe();
+    public ngOnDestroy (): void {
+        if (this.durationTimerSubscription) {
+            this.durationTimerSubscription.unsubscribe();
         }
     }
 
-    public animationPause () {
-        this.isMouseFocused = true;
+    public onToastWrapperMouseOver (): void {
+        this.isMouseOverWrapper = true;
     }
 
-    public animationPlay () {
-        this.isMouseFocused = false;
+    public onToastWrapperMouseOut (): void {
+        this.isMouseOverWrapper = false;
     }
 
-    public onClick () {
-        if (this.Toast.IsClosableByMouseClick) {
-            this.Toast.Close(false);
+    public onToastWrapperClick (): void {
+        if (this.toast.isClosableByMouseClick) {
+            this.toast.close(false);
         }
     }
 
-    public remove (confirmationResult?: boolean) {
-        this.Toast.Close(confirmationResult || false);
+    public closeToast (confirmationResult: boolean = false): void {
+        this.toast.close(confirmationResult);
     }
+
+    private updateProgressLineWidth (): void {
+        this.progressLineWidth = (100 / this.toast.duration * this.currentDuration).toFixed(0) + '%';
+    }
+
+    private onProgressUpdate (): void {
+        if (this.currentDuration <= 0) {
+            this.toast.close();
+        }
+    }
+
 }

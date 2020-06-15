@@ -1,160 +1,127 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ToastMessage, ToastMessageParams, SystemToastParams } from './Models/toast-message.models';
+import { ToastMessageParams, SystemToastParams } from './interfaces';
+import { ToastMessage } from './models';
 
 @Injectable()
 export class AngularBootstrapToastsService {
 
-  private toastsList: BehaviorSubject<ToastMessage[]> = new BehaviorSubject<ToastMessage[]>([]);
-  public get ToastsList$ (): Observable<ToastMessage[]> {
-    return this.toastsList.asObservable();
-  }
-
-  private defaultTitle: string = 'Title';
-  public get DefaultTitle (): string {
-    return this.defaultTitle;
-  }
-
-  private defaultText: string = 'Message';
-  public get DefaultText (): string {
-    return this.defaultText;
-  }
-
-  private defaultDuration: number = 5000;
-  public get DefaultDuration (): number {
-    return this.defaultDuration;
-  }
-
-
-  private minDuration: number   = 300;
-  private maxMessageId: number  = 1;
-
-  constructor () {}
-
-  /** Show success toast message */
-  public showSimpleToast (params: ToastMessageParams): ToastMessage {
-    const systemParams: SystemToastParams = {
-      id: this.maxMessageId,
-      type: 'simple'
-    };
-
-    return this.createToast(params, systemParams);
-  }
-
-  /** Show toast message with confirmation and decline button variants */
-  public showConfirmToast (params: ToastMessageParams): ToastMessage {
-    const systemParams: SystemToastParams = {
-      id: this.maxMessageId,
-      type: 'confirm'
-    };
-
-    return this.createToast(params, systemParams);
-  }
-
-  /** Change Default **Title** for all toasts wich not get `title` property from params when creating */
-  public changeDefaultTitle (newTitle: string) {
-    const validTitle = this.validateTitle(newTitle);
-
-    if (validTitle) {
-      this.defaultTitle = validTitle;
+    public get toastsList$ (): Observable<ToastMessage[]> {
+        return this._toastsList$.asObservable();
     }
-  }
 
-  /** Change Default **Text** for all toasts wich not get `text` property from params when creating */
-  public changeDefaultText (newText: string) {
-    const validText = this.validateText(newText);
-
-    if (validText) {
-      this.defaultText = validText;
+    public get defaultTitle (): string {
+        return this._defaultTitle;
     }
-  }
 
-  /** Change Default **Duration** for all toasts */
-  public changeDefaultDuration (duration: number) {
-    const validDuration = this.validateDuration(duration);
-
-    if (validDuration) {
-      this.defaultDuration = duration;
+    public get defaultText (): string {
+        return this._defaultText;
     }
-  }
 
-  private createToast (params: ToastMessageParams, systemParams: SystemToastParams): ToastMessage {
-    const messages    = this.toastsList.getValue();
-    const validParams = this.validateParams(params);
-    const toast       = new ToastMessage(validParams, systemParams);
+    public get defaultDuration (): number {
+        return this._defaultDuration;
+    }
 
-    messages.push(toast);
+    private _defaultTitle: string = 'Title';
+    private _defaultText: string = 'Message';
+    private _defaultDuration: number = 5000;
+    private _minDuration: number = 300;
+    private _maxMessageId: number = 1;
 
-    this.maxMessageId++;
-    this.toastsList.next(messages);
+    private _toastsList$: BehaviorSubject<ToastMessage[]> = new BehaviorSubject<ToastMessage[]>([]);
 
-    const toastSubscription = toast.ConfirmationResult$.subscribe(() => {
-      const actualMessages = this.toastsList.getValue();
+    constructor () {}
 
-      for (const [index, message] of actualMessages.entries()) {
-        if (message.Id === toast.Id) {
-          actualMessages.splice(index, 1);
-          break;
+    /** Show success toast message */
+    public showSimpleToast (params: ToastMessageParams): ToastMessage {
+        const systemParams: SystemToastParams = {
+            id: this._maxMessageId,
+            type: 'simple'
+        };
+
+        return this.createToast(params, systemParams);
+    }
+
+    /** Show toast message with confirmation and decline button variants */
+    public showConfirmToast (params: ToastMessageParams): ToastMessage {
+        const systemParams: SystemToastParams = {
+            id: this._maxMessageId,
+            type: 'confirm'
+        };
+
+        return this.createToast(params, systemParams);
+    }
+
+    /** Change Default **Title** for all toasts wich not get `title` property from params when creating */
+    public changeDefaultTitle (newTitle: string): void {
+        this.validateTitle(newTitle);
+
+        this._defaultTitle = newTitle;
+    }
+
+    /** Change Default **Text** for all toasts wich not get `text` property from params when creating */
+    public changeDefaultText (newText: string): void {
+        this._defaultText = newText;
+    }
+
+    /** Change Default **Duration** for all toasts */
+    public changeDefaultDuration (duration: number): void {
+        this.validateDuration(duration);
+
+        this._defaultDuration = duration;
+    }
+
+    private createToast (params: ToastMessageParams, systemParams: SystemToastParams): ToastMessage {
+        const messages    = [...this._toastsList$.getValue()];
+        const validParams = this.validateParams(params);
+        const toast       = new ToastMessage(validParams, systemParams);
+
+        messages.push(toast);
+
+        this._maxMessageId++;
+        this._toastsList$.next(messages);
+
+        this.initToastConfirmationObserver(toast);
+
+        return toast;
+    }
+
+    private initToastConfirmationObserver (toast: ToastMessage): void {
+        const toastSubscription = toast.confirmationResult$
+            .subscribe(() => {
+                const actualMessages = [...this._toastsList$.getValue()]
+                    .filter((message) => message.id !== toast.id);
+
+                this._toastsList$.next(actualMessages);
+
+                toastSubscription.unsubscribe();
+            });
+    }
+
+    private validateParams (params: ToastMessageParams): ToastMessageParams {
+        const newParams    = { ...params };
+        newParams.duration = +params.duration;
+
+        this.validateTitle(newParams.title);
+        this.validateDuration(newParams.duration);
+
+        return newParams;
+    }
+
+    private validateTitle (title: string): void {
+        if (!title || typeof title !== 'string') {
+            throw new Error('Tost title must be a string with length');
         }
-      }
-
-      this.toastsList.next(actualMessages);
-
-      toastSubscription.unsubscribe();
-    });
-
-    return toast;
-  }
-
-  private validateParams (params: ToastMessageParams): ToastMessageParams {
-    const newParams = params;
-
-    try {
-      newParams.title = this.validateTitle(newParams.title);
-    } catch (err) {
-      newParams.title = this.DefaultTitle;
     }
 
-    try {
-      newParams.text = this.validateText(newParams.text);
-    } catch (err) {
-      newParams.text = this.DefaultText;
+    private validateDuration (duration: number): void {
+        const durationAsNumber: number = +duration;
+
+        if (isNaN(durationAsNumber)) {
+            throw new Error('Tost duration must be a number');
+        } else if (durationAsNumber < this._minDuration) {
+            throw new Error(`Tost duration must be more than ${this._minDuration} milliseconds`);
+        }
     }
 
-    try {
-      newParams.duration = this.validateDuration(newParams.duration);
-    } catch (err) {
-      newParams.duration = this.DefaultDuration;
-    }
-
-    return newParams;
-  }
-
-  private validateTitle (title: string) {
-    if (!title || typeof title !== 'string') {
-      throw new Error('Tost default title must be a string with length');
-    }
-
-    return title;
-  }
-
-  private validateText (text: string) {
-    if (!text || typeof text !== 'string') {
-      throw new Error('Tost default text must be a string with length');
-    }
-
-    return text;
-  }
-
-  private validateDuration (duration: number) {
-    const durationAsNumber: number = +duration;
-
-    if (isNaN(durationAsNumber)) {
-      throw new Error('Tost duration must be a number');
-    } else if (durationAsNumber < this.minDuration) {
-      throw new Error(`Tost duration must be more than ${this.minDuration} milliseconds`);
-    }
-
-    return durationAsNumber;
-  }
 }
